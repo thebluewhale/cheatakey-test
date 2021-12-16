@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import Footer from 'react-bulma-companion/lib/Footer';
-import Container from 'react-bulma-companion/lib/Container';
-import Content from 'react-bulma-companion/lib/Content';
+import Footer from "react-bulma-companion/lib/Footer";
+import Container from "react-bulma-companion/lib/Container";
+import Content from "react-bulma-companion/lib/Content";
 
 export default function FooterComponent() {
   const year = new Date().getFullYear();
@@ -12,7 +12,7 @@ export default function FooterComponent() {
       <Container>
         <Content className="has-text-centered">
           <p>
-            {`Copyright Ⓒ ${year} MERN Boilerplate. All Rights Reserved.`}
+            {`Copyright Ⓒ ${year} CheatA-Key Projects. All Rights Reserved.`}
           </p>
         </Content>
       </Container>

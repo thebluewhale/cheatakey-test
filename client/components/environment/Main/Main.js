@@ -7,7 +7,8 @@ import ReactNotification from "react-notifications-component";
 
 import HomePage from "_pages/HomePage";
 import LostPage from "_pages/LostPage";
-
+import TestPage from "_pages/TestPage";
+import NavigationBar from "_organisms/NavigationBar";
 import Footer from "_organisms/Footer";
 
 export default function Main({ location }) {
@@ -26,9 +27,11 @@ export default function Main({ location }) {
   return (
     <div>
       <ReactNotification />
+      <NavigationBar />
       <div className="main">
         <Switch>
           <Route exact path="/" component={HomePage} />
+          <Route exact path="/test" component={TestPage} />
           <Route path="*" component={LostPage} />
         </Switch>
       </div>

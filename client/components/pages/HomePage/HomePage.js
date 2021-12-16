@@ -1,17 +1,12 @@
 import React, { useEffect } from "react";
-
-import Section from "react-bulma-companion/lib/Section";
-import Container from "react-bulma-companion/lib/Container";
-import Title from "react-bulma-companion/lib/Title";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   return (
-    <div className="home-page page">
-      <Section>
-        <Container>
-          <Title size="1">Home Page!</Title>
-        </Container>
-      </Section>
+    <div className="container">
+      <h2>
+        <Link to="/test">CLICK TO START TEST</Link>
+      </h2>
     </div>
   );
 }
