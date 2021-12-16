@@ -17,6 +17,9 @@ app.use(bodyParser.json());
 
 configPassport(app, express);
 
-app.use("/", routes);
+app.use("/api", routes);
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../../dist", "index.html"));
+});
 
 app.listen(port, () => console.log(`Server is listening on port ${port}`));

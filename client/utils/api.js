@@ -15,8 +15,15 @@ export const handleError = (error) => {
   }
 };
 
-// export const dispatchError = dispatch => res => {
-//     if (res.status == 401) {
-
-//     }
-// }
+export const dispatchError = (dispatch) => (res) => {
+  RNC.addNotification({
+    title: `Error: ${res.status}`,
+    message: res.body.message,
+    type: "danger",
+    container: "top-right",
+    animationIn: ["animated", "fadeInRight"],
+    animationOut: ["animated", "fadeOutRight"],
+    dismiss: { duration: 2000 },
+  });
+  throw res;
+};
