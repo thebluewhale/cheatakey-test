@@ -14,7 +14,7 @@ import Textarea from "react-bulma-companion/lib/Textarea";
 import Button from "react-bulma-companion/lib/Button";
 
 export default function TestPage() {
-  const MAX_PROGRESS = 50;
+  const MAX_PROGRESS = 2;
   const dispatch = useDispatch();
   const lists = useSelector((state) => state.tests.lists);
   const [submittedText, setSubmittedText] = useState("");
@@ -39,7 +39,7 @@ export default function TestPage() {
       <Container>
         <Box>
           <Block>
-            <Progress color="primary" max={MAX_PROGRESS} value={progress} />
+            <Progress max={MAX_PROGRESS} value={progress} />
           </Block>
           <Field>
             <Label>Presented Sentence</Label>
