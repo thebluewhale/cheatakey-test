@@ -1,2 +1,2 @@
 // Images
-import './images/default-profile.png';
+import "./images/app_logo_light.png";

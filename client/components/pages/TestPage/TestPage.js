@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 
 import Container from "react-bulma-companion/lib/Container";
+import Progress from "react-bulma-companion/lib/Progress";
 import Field from "react-bulma-companion/lib/Field";
 import Label from "react-bulma-companion/lib/Label";
 import Box from "react-bulma-companion/lib/Box";
@@ -13,7 +14,7 @@ import Textarea from "react-bulma-companion/lib/Textarea";
 import Button from "react-bulma-companion/lib/Button";
 
 export default function TestPage() {
-  const MAX_PROGRESS = 2;
+  const MAX_PROGRESS = 50;
   const dispatch = useDispatch();
   const lists = useSelector((state) => state.tests.lists);
   const [submittedText, setSubmittedText] = useState("");
@@ -37,6 +38,9 @@ export default function TestPage() {
     <div className="test-page page">
       <Container>
         <Box>
+          <Block>
+            <Progress color="primary" max={MAX_PROGRESS} value={progress} />
+          </Block>
           <Field>
             <Label>Presented Sentence</Label>
             <React.Fragment key=".0">
@@ -55,7 +59,7 @@ export default function TestPage() {
               ></Textarea>
             </Control>
           </Field>
-          <Button color="info" onClick={onSubmitText}>
+          <Button color="primary" onClick={onSubmitText}>
             Submit
           </Button>
         </Box>

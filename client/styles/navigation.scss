@@ -1,5 +1,5 @@
 .navbar {
-  background-color: $ctk-primary;
+  background-color: $ctk-purple;
 
   &.has-shadow {
     box-shadow: 0 2px 3px rgba(10, 10, 10, 0.3);
@@ -11,7 +11,7 @@
   }
 
   .navbar-end .navbar-item:hover {
-    background: $ctk-primary-dark;
+    background: $ctk-purple;
   }
 
   .navbar-item {
@@ -19,7 +19,7 @@
   }
 
   .navbar-item.is-hoverable:hover {
-    background-color: $ctk-primary-dark;
+    background-color: $ctk-purple;
   }
 
   .navbar-item .dropdown-caret {
@@ -47,7 +47,7 @@
   .profile-img {
     height: 32px;
     width: 32px;
-    border: 1px solid $ctk-primary-dark;
+    border: 1px solid $ctk-purple;
     border-radius: 3px;
     max-height: none;
   }

@@ -5,9 +5,9 @@ import R from "ramda";
 
 import { attemptToGetTestLists } from "_thunks/tests";
 
-import Section from "react-bulma-companion/lib/Section";
-import Container from "react-bulma-companion/lib/Container";
-import Title from "react-bulma-companion/lib/Title";
+import Box from "react-bulma-companion/lib/Box";
+import Block from "react-bulma-companion/lib/Block";
+import Image from "react-bulma-companion/lib/Image";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -20,13 +20,18 @@ export default function HomePage() {
 
   return (
     <div className="welcome-page page">
-      <Section>
-        <Container>
-          <Title size="1">
-            <Link to="/test">Click to test</Link>
-          </Title>
-        </Container>
-      </Section>
+      <Box>
+        <Link to="/test">
+          <Block>This text is above the image</Block>
+          <Block>
+            <Image src="images/app_logo_light.png" />
+          </Block>
+          <Block>
+            And this is below and it is where it should be even before the image
+            is loaded
+          </Block>
+        </Link>
+      </Box>
     </div>
   );
 }

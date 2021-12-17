@@ -8,6 +8,7 @@ import ReactNotification from "react-notifications-component";
 import HomePage from "_pages/HomePage";
 import LostPage from "_pages/LostPage";
 import TestPage from "_pages/TestPage";
+import TerminatePage from "_pages/TerminatePage";
 import NavigationBar from "_organisms/NavigationBar";
 import Footer from "_organisms/Footer";
 
@@ -32,6 +33,7 @@ export default function Main({ location }) {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/test" component={TestPage} />
+          <Route exact path="/terminate" component={TerminatePage} />
           <Route path="*" component={LostPage} />
         </Switch>
       </div>

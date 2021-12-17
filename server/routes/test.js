@@ -1,12 +1,12 @@
 const express = require("express");
+const testSet = require("../testSet/testSet");
 
 const router = express.Router();
 
 module.exports = router;
 
 router.get("/testlists", (req, res) => {
-  console.log("get router reached");
-  let lists = ["time flies like an arrow", "early bird gets bug"];
+  let lists = testSet;
   res.send({ message: "Test lists are retrieved successfully", lists });
 });
 
