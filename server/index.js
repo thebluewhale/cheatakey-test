@@ -3,7 +3,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 
 require("./config/environment");
-require("./database");
+const db = require("./database");
 
 const routes = require("./routes/index");
 const configPassport = require("./passport/passport-config");
