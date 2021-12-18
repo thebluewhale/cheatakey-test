@@ -7,8 +7,8 @@ export default function LostPage() {
       <div className="col s12 m5">
         <Link to="/">
           <div className="card-panel teal white-text">
-            <h4>Thank you.</h4>
-            <h4>Click to go first page.</h4>
+            <h5>Thank you.</h5>
+            <h6>Click to go first page.</h6>
           </div>
         </Link>
       </div>

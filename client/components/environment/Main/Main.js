@@ -29,7 +29,7 @@ export default function Main({ location }) {
     <div>
       <ReactNotification />
       <NavigationBar />
-      <div className="main">
+      <div className="main container">
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/test" component={TestPage} />

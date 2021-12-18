@@ -7,7 +7,7 @@ import Main from "_environment/Main";
 
 export default function Root({ history, store }) {
   return (
-    <div className="root-page">
+    <div>
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <Main />
