@@ -1,6 +1,3 @@
-import { snakeToCamelCase } from "json-style-converter/es5";
-import R from "ramda";
-
 import { getTestLists, postTestResult } from "_api/tests";
 import { setTestLists } from "_actions/tests";
 import { dispatchError } from "_utils/api";

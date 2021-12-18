@@ -9,4 +9,8 @@ export const getTestLists = () => {
 };
 
 export const postTestResult = (result) =>
-  request.post("/api/test/result").then(handleSuccess).catch(handleError);
+  request
+    .post("/api/test/result")
+    .send(result)
+    .then(handleSuccess)
+    .catch(handleError);

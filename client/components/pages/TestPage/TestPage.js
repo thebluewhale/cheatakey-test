@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
+import { attempToPostTestResult } from "_thunks/tests";
+import R from "ramda";
 
 export default function TestPage() {
   const MAX_PROGRESS = 2;
@@ -16,6 +18,9 @@ export default function TestPage() {
 
   const onSubmitText = () => {
     setProgress(progress + 1);
+    dispatch(attempToPostTestResult(presentedText, submittedText, 0))
+      .catch(R.identity())
+      .then(() => {});
     setSubmittedText("");
   };
 
