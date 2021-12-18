@@ -16,6 +16,7 @@ export default function TestPage() {
 
   const onSubmitText = () => {
     setProgress(progress + 1);
+    setSubmittedText("");
   };
 
   useEffect(() => {
@@ -36,8 +37,8 @@ export default function TestPage() {
         </div>
       </div>
       <div className="col s12">
-        <div className="card-panel teal white-text">
-          <h5>{presentedText}</h5>
+        <div className="card-panel purple lighten-5">
+          <h5 className="grey-text text-darken-2">{presentedText}</h5>
         </div>
       </div>
       <div className="col s12">
@@ -55,7 +56,7 @@ export default function TestPage() {
           </div>
         </div>
         <div className="col s12">
-          <div className="btn" onClick={onSubmitText}>
+          <div className="btn purple lighten-2" onClick={onSubmitText}>
             Submit
           </div>
         </div>

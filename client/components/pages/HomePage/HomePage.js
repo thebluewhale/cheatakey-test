@@ -17,9 +17,9 @@ export default function HomePage() {
   return (
     <div className="row">
       <div className="col s12 m5">
-        <div className="card-panel teal">
+        <div className="card-panel grey lighten-3">
           <Link to="/test">
-            <h2 className="white-text center-align">Click to start</h2>
+            <h4 className="purple-text center-align">START</h4>
           </Link>
         </div>
       </div>

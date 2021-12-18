@@ -6,9 +6,9 @@ export default function LostPage() {
     <div className="row">
       <div className="col s12 m5">
         <Link to="/">
-          <div className="card-panel teal white-text">
-            <h5>Thank you.</h5>
-            <h6>Click to go first page.</h6>
+          <div className="card-panel grey lighten-3">
+            <h5 className="purple-text">Thank you.</h5>
+            <h6 className="purple-text">Click to go first page.</h6>
           </div>
         </Link>
       </div>
