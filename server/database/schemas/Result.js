@@ -12,6 +12,8 @@ const testResult = new Schema({
     trim: true,
   },
   leadTime: Number,
+  accuracy: Number,
+  speed: Number,
   created: {
     type: Date,
     default: Date.now,

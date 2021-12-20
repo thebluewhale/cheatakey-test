@@ -95,7 +95,7 @@ module.exports = {
             loader: "url-loader",
             options: {
               limit: 4000,
-              name: "images/[name][ext]",
+              name: "images/[name].[ext]",
             },
           },
         ],
@@ -104,14 +104,14 @@ module.exports = {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         type: "asset/resource",
         generator: {
-          filename: "icons/[name][ext]",
+          filename: "icons/[name].[ext]",
         },
       },
       {
         test: /\.(woff(2)|ttf|eot|otf)?(\?v=\d+\.\d+\.\d+)?$/,
         type: "asset/resource",
         generator: {
-          filename: "fonts/[name][ext]",
+          filename: "fonts/[name].[ext]",
         },
       },
     ],

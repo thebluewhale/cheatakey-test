@@ -11,8 +11,8 @@ export const attemptToGetTestLists = () => (dispatch) =>
     .catch(dispatchError(dispatch));
 
 export const attempToPostTestResult =
-  (presented, submitted, leadTime) => (dispatch) =>
-    postTestResult({ presented, submitted, leadTime })
+  (presented, submitted, leadTime, accuracy, speed) => (dispatch) =>
+    postTestResult({ presented, submitted, leadTime, accuracy, speed })
       .then((data) => {
         return data;
       })

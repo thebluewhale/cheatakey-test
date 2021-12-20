@@ -27,11 +27,19 @@ export default function TestPage() {
 
   const onSubmitText = () => {
     setProgress(progress + 1);
-    // let endTime = new Date();
-    // let leadTime = endTime.getTime() - startTime.getTime();
-    // dispatch(attempToPostTestResult(presentedText, submittedText, leadTime))
-    //   .catch(R.identity())
-    //   .then(() => {});
+    let endTime = new Date();
+    let leadTime = endTime.getTime() - startTime.getTime();
+    dispatch(
+      attempToPostTestResult(
+        presentedText,
+        submittedText,
+        leadTime,
+        accuracy,
+        speed
+      )
+    )
+      .catch(R.identity())
+      .then(() => {});
     setSubmittedText("");
     setIsStarted(false);
     setAccuracy(0);
@@ -50,7 +58,7 @@ export default function TestPage() {
     if (submittedText.length > 0) {
       let currentTime = new Date();
       let leadSec = (currentTime.getTime() - startTime.getTime()) / 1000;
-      setSpeed(((submittedText.length / leadSec) * 60).toFixed(3));
+      setSpeed(((submittedText.length / leadSec) * 60).toFixed(0));
     }
     // Calc accuracy
     let errorTextCount = 0;

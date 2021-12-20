@@ -11,9 +11,17 @@ export const setTestLists = (lists) => ({
   lists,
 });
 
-export const postTestResults = ({ presented, submitted, leadTime }) => ({
+export const postTestResults = ({
+  presented,
+  submitted,
+  leadTime,
+  accuracy,
+  speed,
+}) => ({
   type: POST_TEST_RESULTS,
   presented,
   submitted,
   leadTime,
+  accuracy,
+  speed,
 });
