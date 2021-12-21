@@ -31,10 +31,10 @@ export default function HomePage() {
             <img src="./images/app_logo.png"></img>
           </div>
         ) : (
-          <Link to="/test">
+          <Link to="/settings">
             <div>
               <h4 className="purple-text center-align text-blink">
-                TAP TO START
+                TAP TO STEP 1
               </h4>
             </div>
           </Link>

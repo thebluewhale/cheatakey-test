@@ -8,6 +8,7 @@ export default function TestPage() {
   const MAX_PROGRESS = 2;
   const dispatch = useDispatch();
   const lists = useSelector((state) => state.tests.lists);
+  const variables = useSelector((state) => state.tests.variables);
   const [submittedText, setSubmittedText] = useState("");
   const [presentedText, setPresentedText] = useState("");
   const [progress, setProgress] = useState(0);
@@ -45,6 +46,10 @@ export default function TestPage() {
     setAccuracy(0);
     submitInput.current.focus();
   };
+
+  useEffect(() => {
+    console.log(variables);
+  });
 
   useEffect(() => {
     if (progress == MAX_PROGRESS) {

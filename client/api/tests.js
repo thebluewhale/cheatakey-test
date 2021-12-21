@@ -8,6 +8,14 @@ export const getTestLists = () => {
     .catch(handleError);
 };
 
+export const postTesterVariables = (variables) => {
+  return request
+    .post("/api/test/testervariables")
+    .send(variables)
+    .then(handleSuccess)
+    .catch(handleError);
+};
+
 export const postTestResult = (result) =>
   request
     .post("/api/test/result")

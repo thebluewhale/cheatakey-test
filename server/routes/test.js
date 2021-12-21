@@ -11,6 +11,14 @@ router.get("/testlists", (req, res) => {
   res.send({ message: "Test lists are retrieved successfully", lists });
 });
 
+router.post("/testervariables", (req, res) => {
+  let variables = req.body;
+  res.send({
+    message: "Tester variables are retrieved successfully",
+    variables,
+  });
+});
+
 router.post("/result", (req, res) => {
   const {
     presented,
