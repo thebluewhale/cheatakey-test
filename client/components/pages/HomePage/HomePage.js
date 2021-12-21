@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import R from "ramda";
-
 import { attemptToGetTestLists } from "_thunks/tests";
 
 export default function HomePage() {

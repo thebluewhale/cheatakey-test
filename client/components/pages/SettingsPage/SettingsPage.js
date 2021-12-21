@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import { attemptToSetTesterVariables } from "_thunks/tests";
 import {

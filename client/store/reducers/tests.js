@@ -1,5 +1,4 @@
 import update from "immutability-helper";
-import R from "ramda";
 
 import {
   SET_TEST_LISTS,
