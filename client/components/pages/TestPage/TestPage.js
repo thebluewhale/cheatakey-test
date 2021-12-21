@@ -36,7 +36,10 @@ export default function TestPage() {
         submittedText,
         leadTime,
         accuracy,
-        speed
+        speed,
+        variables.testType,
+        variables.keyboardType,
+        variables.nickName
       )
     )
       .catch(R.identity())
@@ -46,10 +49,6 @@ export default function TestPage() {
     setAccuracy(0);
     submitInput.current.focus();
   };
-
-  useEffect(() => {
-    console.log(variables);
-  });
 
   useEffect(() => {
     if (progress == MAX_PROGRESS) {

@@ -14,7 +14,10 @@ const testResult = new Schema({
   leadTime: Number,
   accuracy: Number,
   speed: Number,
-  testType: Number,
+  testType: {
+    type: String,
+    trim: true,
+  },
   keyboardType: {
     type: String,
     trim: true,

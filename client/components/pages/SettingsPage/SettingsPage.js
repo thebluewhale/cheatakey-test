@@ -2,7 +2,13 @@ import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { attemptToSetTesterVariables } from "_thunks/tests";
-import R from "ramda";
+import {
+  KEYBOARD_TYPE_QWERTY,
+  KEYBOARD_TYPE_CHEATAKEY,
+  TEST_TYPE_1ST,
+  TEST_TYPE_2ND,
+  TEST_TYPE_PRACTICE,
+} from "_utils/variables";
 import M from "materialize-css";
 
 export default function SettingsPage() {
@@ -45,9 +51,9 @@ export default function SettingsPage() {
           <option value="test-type-default" disabled>
             Choose test type
           </option>
-          <option value="test-type-1st">1st Test</option>
-          <option value="test-type-2nd">2nd Test</option>
-          <option value="test-type-practice">Practice</option>
+          <option value={TEST_TYPE_1ST}>1st Test</option>
+          <option value={TEST_TYPE_2ND}>2nd Test</option>
+          <option value={TEST_TYPE_PRACTICE}>Practice</option>
         </select>
         <label>Test type</label>
       </div>
@@ -59,8 +65,8 @@ export default function SettingsPage() {
           <option value="keyboard-type-default" disabled>
             Choose keyboard type
           </option>
-          <option value="keyboard-type-qwerty">QWERTY</option>
-          <option value="keyboard-type-cheatakey">CheatA-Key</option>
+          <option value={KEYBOARD_TYPE_QWERTY}>QWERTY</option>
+          <option value={KEYBOARD_TYPE_CHEATAKEY}>CheatA-Key</option>
         </select>
         <label>Keyboard type</label>
       </div>
