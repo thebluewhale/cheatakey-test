@@ -14,6 +14,15 @@ const testResult = new Schema({
   leadTime: Number,
   accuracy: Number,
   speed: Number,
+  testType: Number,
+  keyboardType: {
+    type: String,
+    trim: true,
+  },
+  nickName: {
+    type: String,
+    trim: true,
+  },
   created: {
     type: Date,
     default: Date.now,

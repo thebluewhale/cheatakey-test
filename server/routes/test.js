@@ -12,13 +12,25 @@ router.get("/testlists", (req, res) => {
 });
 
 router.post("/result", (req, res) => {
-  const { presented, submitted, leadTime, accuracy, speed } = req.body;
+  const {
+    presented,
+    submitted,
+    leadTime,
+    accuracy,
+    speed,
+    testType,
+    keyboardType,
+    nickName,
+  } = req.body;
   let newResult = new Result({
     presentedText: presented,
     submittedText: submitted,
     leadTime: leadTime,
     accuracy: accuracy,
     speed: speed,
+    testType,
+    keyboardType,
+    nickName,
   });
   newResult.save((err) => {
     if (err) {
