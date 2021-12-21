@@ -18,7 +18,7 @@ export default function TestPage() {
   const [isStarted, setIsStarted] = useState(false);
   const submitInput = useRef();
 
-  const updateText = (e) => {
+  const onSubmitInputChanged = (e) => {
     if (e.target.value.length == 1 && isStarted == false) {
       setStartTime(new Date());
       setIsStarted(true);
@@ -98,7 +98,7 @@ export default function TestPage() {
               type="text"
               className="validate"
               value={submittedText}
-              onChange={updateText}
+              onChange={onSubmitInputChanged}
               ref={submitInput}
             />
             <label htmlFor="submitter">Type here</label>

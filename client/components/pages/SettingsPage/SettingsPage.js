@@ -15,6 +15,7 @@ export default function SettingsPage() {
   const dispatch = useDispatch();
   const [selectedTestType, setSelectedTestType] = useState("");
   const [selectedKeyboardType, setSelectedKeyboardType] = useState("");
+  const [nickName, setNickName] = useState("");
 
   const onTestTypeSelectChange = (e) => {
     setSelectedTestType(e.target.value);
@@ -25,15 +26,27 @@ export default function SettingsPage() {
   };
 
   const onSubmitVariables = () => {
-    if (selectedTestType == "" || selectedKeyboardType == "") {
+    if (
+      selectedTestType == "" ||
+      selectedKeyboardType == "" ||
+      nickName == ""
+    ) {
       M.Modal.init(document.getElementById("modal1")).open();
     } else {
       dispatch(
-        attemptToSetTesterVariables(selectedTestType, selectedKeyboardType)
+        attemptToSetTesterVariables(
+          selectedTestType,
+          selectedKeyboardType,
+          nickName
+        )
       ).then(() => {
         dispatch(push("/test"));
       });
     }
+  };
+
+  const onNickNameInputchanged = (e) => {
+    setNickName(e.target.value);
   };
 
   useEffect(() => {
@@ -69,6 +82,18 @@ export default function SettingsPage() {
           <option value={KEYBOARD_TYPE_CHEATAKEY}>CheatA-Key</option>
         </select>
         <label>Keyboard type</label>
+      </div>
+      <div className="col s12">
+        <div className="input-field">
+          <input
+            id="nickName"
+            type="text"
+            className="validate"
+            value={nickName}
+            onChange={onNickNameInputchanged}
+          />
+          <label htmlFor="nickName">Nick Name</label>
+        </div>
       </div>
       <div className="col s12">
         <button
