@@ -33,7 +33,7 @@ export default function HomePage() {
           <Link to="/settings">
             <div>
               <h4 className="purple-text center-align text-blink">
-                TAP TO STEP 1
+                TAP TO START
               </h4>
             </div>
           </Link>

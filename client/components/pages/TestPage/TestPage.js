@@ -85,7 +85,6 @@ export default function TestPage() {
   }, [extractedLists]);
 
   useEffect(() => {
-    console.log(extractedLists);
     if (progress == MAX_PROGRESS) {
       dispatch(push("/terminate"));
     }
