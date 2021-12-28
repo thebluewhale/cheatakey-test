@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { attempToPostTestResult } from "_thunks/tests";
 import {
-  TEST_TYPE_1ST,
-  TEST_TYPE_2ND,
-  TEST_TYPE_PRACTICE,
+  TEST_TYPE_QWERTY,
+  TEST_TYPE_CTK_FIRST,
+  TEST_TYPE_CTK_PRACTICE,
+  TEST_TYPE_CTK_FINAL,
 } from "_utils/variables";
 import R from "ramda";
 
@@ -24,6 +25,12 @@ export default function TestPage() {
   const [speed, setSpeed] = useState(0.0);
   const [isStarted, setIsStarted] = useState(false);
   const submitInput = useRef();
+
+  const onSubmitInputKeyDown = (e) => {
+    if (e.key == "Backspace") {
+      e.preventDefault();
+    }
+  };
 
   const onSubmitInputChanged = (e) => {
     if (e.target.value.length == 1 && isStarted == false) {
@@ -58,24 +65,29 @@ export default function TestPage() {
   };
 
   useEffect(() => {
-    const shuffle = (array) => {
-      for (let index = array.length - 1; index > 0; index--) {
-        const randomPosition = Math.floor(Math.random() * (index + 1));
-        const temp = array[index];
-        array[index] = array[randomPosition];
-        array[randomPosition] = temp;
-      }
-    };
+    // const shuffle = (array) => {
+    //   for (let index = array.length - 1; index > 0; index--) {
+    //     const randomPosition = Math.floor(Math.random() * (index + 1));
+    //     const temp = array[index];
+    //     array[index] = array[randomPosition];
+    //     array[randomPosition] = temp;
+    //   }
+    // };
 
     let tempLists = [];
-    if (variables.testType == TEST_TYPE_1ST) {
-      tempLists = lists.slice(0, 50);
-    } else if (variables.testType == TEST_TYPE_2ND) {
-      tempLists = lists.slice(50, 100);
+    if (
+      variables.testType == TEST_TYPE_QWERTY ||
+      variables.testType == TEST_TYPE_CTK_FIRST
+    ) {
+      // 10 words
+      tempLists = lists.slice(0, 10);
+    } else if (variables.testType == TEST_TYPE_CTK_PRACTICE) {
+      // 20 words
+      tempLists = lists.slice(10, 30);
     } else {
-      tempLists = lists.slice(100, 150);
+      // 5 words from part 1 + 5 words
+      tempLists = lists.slice(3, 8).concat(lists.slice(30, 35));
     }
-    shuffle(tempLists);
     setExtractedLists(tempLists);
   }, []);
 
@@ -151,6 +163,7 @@ export default function TestPage() {
               className="validate"
               value={submittedText}
               onChange={onSubmitInputChanged}
+              onKeyDown={onSubmitInputKeyDown}
               ref={submitInput}
             />
             <label htmlFor="submitter">Type here</label>

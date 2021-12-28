@@ -5,9 +5,10 @@ import { attemptToSetTesterVariables } from "_thunks/tests";
 import {
   KEYBOARD_TYPE_QWERTY,
   KEYBOARD_TYPE_CHEATAKEY,
-  TEST_TYPE_1ST,
-  TEST_TYPE_2ND,
-  TEST_TYPE_PRACTICE,
+  TEST_TYPE_QWERTY,
+  TEST_TYPE_CTK_FIRST,
+  TEST_TYPE_CTK_PRACTICE,
+  TEST_TYPE_CTK_FINAL,
 } from "_utils/variables";
 import M from "materialize-css";
 
@@ -64,9 +65,10 @@ export default function SettingsPage() {
           <option value="test-type-default" disabled>
             Choose test type
           </option>
-          <option value={TEST_TYPE_1ST}>1st Test</option>
-          <option value={TEST_TYPE_2ND}>2nd Test</option>
-          <option value={TEST_TYPE_PRACTICE}>Practice</option>
+          <option value={TEST_TYPE_QWERTY}>QWERTY Test</option>
+          <option value={TEST_TYPE_CTK_FIRST}>First CheatA-Key Test</option>
+          <option value={TEST_TYPE_CTK_PRACTICE}>CheatA-Key Practice</option>
+          <option value={TEST_TYPE_CTK_FINAL}>Final CheatA-Key Test</option>
         </select>
         <label>Test type</label>
       </div>
