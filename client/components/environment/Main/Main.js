@@ -9,8 +9,10 @@ import HomePage from "_pages/HomePage";
 import LostPage from "_pages/LostPage";
 import AdminPage from "_pages/AdminPage";
 import SettingsPage from "_pages/SettingsPage";
+import GuidePage from "_pages/GuidePage";
 import TestPage from "_pages/TestPage";
 import TerminatePage from "_pages/TerminatePage";
+import ErrorPage from "_pages/ErrorPage";
 import NavigationBar from "_organisms/NavigationBar";
 import Footer from "_organisms/Footer";
 
@@ -36,8 +38,10 @@ export default function Main({ location }) {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/admin" component={AdminPage} />
           <Route exact path="/settings" component={SettingsPage} />
+          <Route exact path="/guide" component={GuidePage} />
           <Route exact path="/test" component={TestPage} />
           <Route exact path="/terminate" component={TerminatePage} />
+          <Route exact path="/error" component={ErrorPage} />
           <Route path="*" component={LostPage} />
         </Switch>
       </div>

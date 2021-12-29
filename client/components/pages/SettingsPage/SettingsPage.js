@@ -41,7 +41,7 @@ export default function SettingsPage() {
           nickName
         )
       ).then(() => {
-        dispatch(push("/test"));
+        dispatch(push("/guide"));
       });
     }
   };
@@ -54,7 +54,7 @@ export default function SettingsPage() {
     setTimeout(() => {
       M.FormSelect.init(document.querySelectorAll("select"));
       M.Modal.init(document.querySelectorAll(".modal"));
-    }, 100);
+    }, 300);
   }, []);
 
   return (

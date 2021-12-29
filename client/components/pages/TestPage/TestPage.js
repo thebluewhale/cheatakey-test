@@ -11,10 +11,10 @@ import {
 import R from "ramda";
 
 export default function TestPage() {
-  const MAX_PROGRESS = 4;
   const dispatch = useDispatch();
   const lists = useSelector((state) => state.tests.lists);
   const variables = useSelector((state) => state.tests.variables);
+  const [maxProgress, setMaxProgress] = useState(20);
   const [extractedLists, setExtractedLists] = useState([]);
   const [submittedText, setSubmittedText] = useState("");
   const [presentedText, setPresentedText] = useState("");
@@ -74,21 +74,31 @@ export default function TestPage() {
     //   }
     // };
 
-    let tempLists = [];
-    if (
-      variables.testType == TEST_TYPE_QWERTY ||
-      variables.testType == TEST_TYPE_CTK_FIRST
-    ) {
-      // 10 words
-      tempLists = lists.slice(0, 10);
-    } else if (variables.testType == TEST_TYPE_CTK_PRACTICE) {
-      // 20 words
-      tempLists = lists.slice(10, 30);
-    } else {
-      // 5 words from part 1 + 5 words
-      tempLists = lists.slice(3, 8).concat(lists.slice(30, 35));
+    let _extractedLists = [];
+    switch (variables.testType) {
+      case TEST_TYPE_QWERTY:
+      case TEST_TYPE_CTK_FIRST:
+        // 10 sentences
+        _extractedLists = lists.slice(0, 10);
+        break;
+      case TEST_TYPE_CTK_PRACTICE:
+        // 5 set, 20 sentences per set
+        let tempList = lists.slice(10, 30);
+        for (let i = 0; i < 5; i++) {
+          tempList.map((data, index) => {
+            _extractedLists.push(data);
+          });
+        }
+        break;
+      case TEST_TYPE_CTK_FINAL:
+        // 5 words from part 1 + 5 words
+        _extractedLists = lists.slice(3, 8).concat(lists.slice(30, 35));
+        break;
+      default:
+        dispatch(push("/error"));
     }
-    setExtractedLists(tempLists);
+    setExtractedLists(_extractedLists);
+    setMaxProgress(_extractedLists.length);
   }, []);
 
   useEffect(() => {
@@ -97,7 +107,7 @@ export default function TestPage() {
   }, [extractedLists]);
 
   useEffect(() => {
-    if (progress == MAX_PROGRESS) {
+    if (progress == maxProgress - 1) {
       dispatch(push("/terminate"));
     }
     setPresentedText(extractedLists[progress]);
@@ -140,7 +150,7 @@ export default function TestPage() {
         <div className="progress">
           <div
             className="determinate"
-            style={{ width: (progress / MAX_PROGRESS) * 100 + "%" }}
+            style={{ width: (progress / maxProgress) * 100 + "%" }}
           ></div>
         </div>
       </div>
