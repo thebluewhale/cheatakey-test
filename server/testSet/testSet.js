@@ -9,7 +9,7 @@ const testSet = [
   "a friend in need is a friend indeed",
   "a good medicine tastes bitter",
   "a journey of a thousand miles begines with a single step",
-  "a leopard ca not change his spots",
+  "a leopard can not change his spots",
   "a little knowledge is dangerous",
   "a loaf of bread is better than the song of many birds",
   "a man is known by the company he keeps",
