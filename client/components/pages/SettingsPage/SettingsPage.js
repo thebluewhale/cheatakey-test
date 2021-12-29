@@ -51,10 +51,8 @@ export default function SettingsPage() {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      M.FormSelect.init(document.querySelectorAll("select"));
-      M.Modal.init(document.querySelectorAll(".modal"));
-    }, 300);
+    M.FormSelect.init(document.querySelectorAll("select"));
+    M.Modal.init(document.querySelectorAll(".modal"));
   }, []);
 
   return (
