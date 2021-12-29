@@ -7,6 +7,8 @@ import {
   TEST_TYPE_CTK_FIRST,
   TEST_TYPE_CTK_PRACTICE,
   TEST_TYPE_CTK_FINAL,
+  REPORT_TYPE_SUBMIT,
+  REPORT_TYPE_ERROR_TYPO,
 } from "_utils/variables";
 import R from "ramda";
 
@@ -24,12 +26,34 @@ export default function TestPage() {
   const [accuracy, setAccuracy] = useState(0);
   const [speed, setSpeed] = useState(0.0);
   const [isStarted, setIsStarted] = useState(false);
+  const [isErrorTypoReported, setIsErrorTypoReported] = useState(false);
   const submitInput = useRef();
 
   const onSubmitInputKeyDown = (e) => {
-    if (e.key == "Backspace") {
-      e.preventDefault();
+    if (e.key == "Backspace" && isErrorTypoReported == false) {
+      setIsErrorTypoReported(true);
+      dispatch(
+        attempToPostTestResult(
+          presentedText,
+          submittedText,
+          0,
+          0,
+          0,
+          variables.testType,
+          variables.keyboardType,
+          variables.nickName,
+          REPORT_TYPE_ERROR_TYPO
+        )
+      )
+        .catch(R.identity())
+        .then(() => {});
+    } else if (e.key != "Backspace" && isErrorTypoReported == true) {
+      setIsErrorTypoReported(false);
     }
+
+    // if (e.key == "Backspace") {
+    //   e.preventDefault();
+    // }
   };
 
   const onSubmitInputChanged = (e) => {
@@ -53,7 +77,8 @@ export default function TestPage() {
         speed,
         variables.testType,
         variables.keyboardType,
-        variables.nickName
+        variables.nickName,
+        REPORT_TYPE_SUBMIT
       )
     )
       .catch(R.identity())

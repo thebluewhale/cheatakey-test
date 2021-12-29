@@ -26,6 +26,7 @@ export const postTestResult = ({
   testType,
   keyboardType,
   nickName,
+  reportType,
 }) => ({
   type: POST_TEST_RESULT,
   presented,
@@ -36,4 +37,5 @@ export const postTestResult = ({
   testType,
   keyboardType,
   nickName,
+  reportType,
 });

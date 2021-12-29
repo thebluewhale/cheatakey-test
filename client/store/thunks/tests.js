@@ -28,7 +28,8 @@ export const attempToPostTestResult =
     speed,
     testType,
     keyboardType,
-    nickName
+    nickName,
+    reportType
   ) =>
   (dispatch) =>
     postTestResult({
@@ -40,6 +41,7 @@ export const attempToPostTestResult =
       testType,
       keyboardType,
       nickName,
+      reportType,
     })
       .then((data) => {
         return data;

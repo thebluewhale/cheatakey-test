@@ -26,6 +26,10 @@ const testResult = new Schema({
     type: String,
     trim: true,
   },
+  reportType: {
+    type: String,
+    trim: true,
+  },
   created: {
     type: Date,
     default: Date.now,

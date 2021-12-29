@@ -29,6 +29,7 @@ router.post("/result", (req, res) => {
     testType,
     keyboardType,
     nickName,
+    reportType,
   } = req.body;
   let newResult = new Result({
     presentedText: presented,
@@ -39,14 +40,12 @@ router.post("/result", (req, res) => {
     testType,
     keyboardType,
     nickName,
+    reportType,
   });
   newResult.save((err) => {
     if (err) {
-      console.log("test posting failed");
       console.log(err);
-      res.status(400).send({ message: "Test result posting failed" });
     } else {
-      console.log("test posting success");
       res.send({ message: "Test result posting success" });
     }
   });
