@@ -6,7 +6,7 @@ const testSet = [
   "Searching for a needle in a haystack",
   "Do into others as you would have them into you",
   "Finders keepers loser weepers",
-  "Be it ever so humble there iss no place like home",
+  "Be it ever so humble there is no place like home",
   "Seize the day",
   "A rags to riches story",
   "Pie in the sky",
