@@ -61,7 +61,7 @@ export default function TestPage() {
       setStartTime(new Date());
       setIsStarted(true);
     }
-    setSubmittedText(e.target.value);
+    setSubmittedText(e.target.value.toLowerCase());
   };
 
   const onSubmitText = () => {
