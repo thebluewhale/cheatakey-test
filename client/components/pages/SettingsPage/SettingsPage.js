@@ -9,6 +9,7 @@ import {
   TEST_TYPE_CTK_FIRST,
   TEST_TYPE_CTK_PRACTICE,
   TEST_TYPE_CTK_FINAL,
+  TEST_TYPE_CTK_DIRECTION,
 } from "_utils/variables";
 import M from "materialize-css";
 
@@ -17,9 +18,15 @@ export default function SettingsPage() {
   const [selectedTestType, setSelectedTestType] = useState("");
   const [selectedKeyboardType, setSelectedKeyboardType] = useState("");
   const [nickName, setNickName] = useState("");
+  const [hideOnDirectionTest, setHideOnDirectionTest] = useState(false);
 
   const onTestTypeSelectChange = (e) => {
     setSelectedTestType(e.target.value);
+    if (e.target.value == TEST_TYPE_CTK_DIRECTION) {
+      setHideOnDirectionTest(true);
+    } else {
+      setHideOnDirectionTest(false);
+    }
   };
 
   const onKeyboardTypeSelectChange = (e) => {
@@ -27,22 +34,26 @@ export default function SettingsPage() {
   };
 
   const onSubmitVariables = () => {
-    if (
-      selectedTestType == "" ||
-      selectedKeyboardType == "" ||
-      nickName == ""
-    ) {
-      M.Modal.init(document.getElementById("modal1")).open();
+    if (selectedTestType == TEST_TYPE_CTK_DIRECTION) {
+      dispatch(push("/direction"));
     } else {
-      dispatch(
-        attemptToSetTesterVariables(
-          selectedTestType,
-          selectedKeyboardType,
-          nickName
-        )
-      ).then(() => {
-        dispatch(push("/guide"));
-      });
+      if (
+        selectedTestType == "" ||
+        selectedKeyboardType == "" ||
+        nickName == ""
+      ) {
+        M.Modal.init(document.getElementById("modal1")).open();
+      } else {
+        dispatch(
+          attemptToSetTesterVariables(
+            selectedTestType,
+            selectedKeyboardType,
+            nickName
+          )
+        ).then(() => {
+          dispatch(push("/guide"));
+        });
+      }
     }
   };
 
@@ -53,7 +64,7 @@ export default function SettingsPage() {
   useEffect(() => {
     M.FormSelect.init(document.querySelectorAll("select"));
     M.Modal.init(document.querySelectorAll(".modal"));
-  }, []);
+  }, [hideOnDirectionTest]);
 
   return (
     <div className="row">
@@ -69,34 +80,39 @@ export default function SettingsPage() {
           <option value={TEST_TYPE_CTK_FIRST}>First CheatA-Key Test</option>
           <option value={TEST_TYPE_CTK_PRACTICE}>CheatA-Key Practice</option>
           <option value={TEST_TYPE_CTK_FINAL}>Final CheatA-Key Test</option>
+          <option value={TEST_TYPE_CTK_DIRECTION}>Direction Test</option>
         </select>
         <label>Test type</label>
       </div>
-      <div className="input-field col s12">
-        <select
-          defaultValue="keyboard-type-default"
-          onChange={onKeyboardTypeSelectChange}
-        >
-          <option value="keyboard-type-default" disabled>
-            Choose keyboard type
-          </option>
-          <option value={KEYBOARD_TYPE_QWERTY}>QWERTY</option>
-          <option value={KEYBOARD_TYPE_CHEATAKEY}>CheatA-Key</option>
-        </select>
-        <label>Keyboard type</label>
-      </div>
-      <div className="col s12">
-        <div className="input-field">
-          <input
-            id="nickName"
-            type="text"
-            className="validate"
-            value={nickName}
-            onChange={onNickNameInputchanged}
-          />
-          <label htmlFor="nickName">Nick Name</label>
+      {hideOnDirectionTest ? null : (
+        <div>
+          <div className="input-field col s12">
+            <select
+              defaultValue="keyboard-type-default"
+              onChange={onKeyboardTypeSelectChange}
+            >
+              <option value="keyboard-type-default" disabled>
+                Choose keyboard type
+              </option>
+              <option value={KEYBOARD_TYPE_QWERTY}>QWERTY</option>
+              <option value={KEYBOARD_TYPE_CHEATAKEY}>CheatA-Key</option>
+            </select>
+            <label>Keyboard type</label>
+          </div>
+          <div className="col s12">
+            <div className="input-field">
+              <input
+                id="nickName"
+                type="text"
+                className="validate"
+                value={nickName}
+                onChange={onNickNameInputchanged}
+              />
+              <label htmlFor="nickName">Nick Name</label>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
       <div className="col s12">
         <button
           className="btn waves-effect waves-light purple lighten-2"

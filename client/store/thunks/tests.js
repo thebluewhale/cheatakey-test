@@ -1,4 +1,9 @@
-import { getTestLists, postTestResult, postTesterVariables } from "_api/tests";
+import {
+  getTestLists,
+  postTestResult,
+  postTesterVariables,
+  postGestureResult,
+} from "_api/tests";
 import { setTestLists, setTesterVariables } from "_actions/tests";
 import { dispatchError } from "_utils/api";
 
@@ -42,6 +47,31 @@ export const attempToPostTestResult =
       keyboardType,
       nickName,
       reportType,
+    })
+      .then((data) => {
+        return data;
+      })
+      .catch(dispatchError(dispatch));
+
+export const attempToPostGestureResult =
+  (
+    touchStartX,
+    touchStartY,
+    touchEndX,
+    touchEndY,
+    submittedAngle,
+    presentedAngle,
+    testType
+  ) =>
+  (dispatch) =>
+    postGestureResult({
+      touchStartX,
+      touchStartY,
+      touchEndX,
+      touchEndY,
+      submittedAngle,
+      presentedAngle,
+      testType,
     })
       .then((data) => {
         return data;

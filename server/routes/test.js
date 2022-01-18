@@ -1,6 +1,6 @@
 const express = require("express");
 const testSet = require("../testSet/testSet");
-const { Result } = require("../database/schemas");
+const { Result, Gesture } = require("../database/schemas");
 
 const router = express.Router();
 
@@ -43,6 +43,34 @@ router.post("/result", (req, res) => {
     reportType,
   });
   newResult.save((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send({ message: "Test result posting success" });
+    }
+  });
+});
+
+router.post("/gesture", (req, res) => {
+  const {
+    touchStartX,
+    touchStartY,
+    touchEndX,
+    touchEndY,
+    submittedAngle,
+    presentedAngle,
+    testType,
+  } = req.body;
+  let newGesture = new Gesture({
+    touchStartX: touchStartX,
+    touchStartY: touchStartY,
+    touchEndX: touchEndX,
+    touchEndY: touchEndY,
+    submittedAngle: submittedAngle,
+    presentedAngle: presentedAngle,
+    testType: testType,
+  });
+  newGesture.save((err) => {
     if (err) {
       console.log(err);
     } else {

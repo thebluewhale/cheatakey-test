@@ -13,6 +13,7 @@ import GuidePage from "_pages/GuidePage";
 import TestPage from "_pages/TestPage";
 import TerminatePage from "_pages/TerminatePage";
 import ErrorPage from "_pages/ErrorPage";
+import DirectionPage from "_pages/DirectionPage";
 import NavigationBar from "_organisms/NavigationBar";
 import Footer from "_organisms/Footer";
 
@@ -42,10 +43,11 @@ export default function Main({ location }) {
           <Route exact path="/test" component={TestPage} />
           <Route exact path="/terminate" component={TerminatePage} />
           <Route exact path="/error" component={ErrorPage} />
+          <Route exact path="/direction" component={DirectionPage} />
           <Route path="*" component={LostPage} />
         </Switch>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

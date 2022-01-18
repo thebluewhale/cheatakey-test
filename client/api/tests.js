@@ -22,3 +22,10 @@ export const postTestResult = (result) =>
     .send(result)
     .then(handleSuccess)
     .catch(handleError);
+
+export const postGestureResult = (result) =>
+  request
+    .post("/api/test/gesture")
+    .send(result)
+    .then(handleSuccess)
+    .catch(handleError);
