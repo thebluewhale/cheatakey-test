@@ -11,7 +11,8 @@ export default function DirectionPage() {
   const [gestureDirectionArr, setGestureDirectionArr] = useState([
     0, 1, 2, 3, 4, 5, 6, 7,
   ]);
-  const [touchStartCoord, setTouchStartCoord] = useState([0, 0]);
+  const [touchStartX, setTouchStartX] = useState(0);
+  const [touchStartY, setTouchStartY] = useState(0);
   const [keyIndex, setKeyIndex] = useState(0);
   const [keyIndexArr, setKeyIndexArr] = useState([0, 1, 2]);
   const [testSetCount, setTestSetCount] = useState(0);
@@ -28,7 +29,6 @@ export default function DirectionPage() {
   };
 
   const displayArrow = (index) => {
-    console.log(gestureDirectionArr);
     switch (index) {
       case 0:
         return <i className="material-icons large">north_west</i>;
@@ -81,21 +81,21 @@ export default function DirectionPage() {
   const touchStart = (e) => {
     let clientX = e.changedTouches[e.changedTouches.length - 1].clientX;
     let clientY = e.changedTouches[e.changedTouches.length - 1].clientY;
-    setTouchStartCoord([clientX, clientY]);
+    setTouchStartX(clientX);
+    setTouchStartY(clientY);
   };
 
   const touchEnd = (e) => {
     let clientX = e.changedTouches[e.changedTouches.length - 1].clientX;
     let clientY = e.changedTouches[e.changedTouches.length - 1].clientY;
-    console.log(clientX - touchStartCoord[0], clientY - touchStartCoord[1]);
-    let submittedAngle = Math.atan2(
-      touchStartCoord[1] - clientY,
-      touchStartCoord[0] - clientX
-    );
+    let submittedAngle =
+      Math.atan2(clientY - touchStartY, clientX - touchStartX) *
+      (180 / Math.PI);
+    if (submittedAngle < 0.0) submittedAngle += 360.0;
     dispatch(
       attempToPostGestureResult(
-        touchStartCoord[0],
-        touchStartCoord[1],
+        touchStartX,
+        touchStartY,
         clientX,
         clientY,
         submittedAngle,
