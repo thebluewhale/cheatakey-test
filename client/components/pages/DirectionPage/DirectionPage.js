@@ -54,7 +54,7 @@ export default function DirectionPage() {
       case 0:
         return (
           <div
-            className="col s2 offset-s1 key"
+            className="col s2 offset-s1 key key-normal"
             onTouchStart={touchStart}
             onTouchEnd={touchEnd}
           ></div>
@@ -62,7 +62,7 @@ export default function DirectionPage() {
       case 1:
         return (
           <div
-            className="col s2 offset-s5 key"
+            className="col s2 offset-s5 key key-normal"
             onTouchStart={touchStart}
             onTouchEnd={touchEnd}
           ></div>
@@ -70,7 +70,7 @@ export default function DirectionPage() {
       case 2:
         return (
           <div
-            className="col s2 offset-s9 key"
+            className="col s2 offset-s9 key key-normal"
             onTouchStart={touchStart}
             onTouchEnd={touchEnd}
           ></div>
@@ -79,6 +79,8 @@ export default function DirectionPage() {
   };
 
   const touchStart = (e) => {
+    e.target.classList.remove("key-normal");
+    e.target.classList.add("key-pressed");
     let clientX = e.changedTouches[e.changedTouches.length - 1].clientX;
     let clientY = e.changedTouches[e.changedTouches.length - 1].clientY;
     setTouchStartX(clientX);
@@ -86,6 +88,8 @@ export default function DirectionPage() {
   };
 
   const touchEnd = (e) => {
+    e.target.classList.remove("key-pressed");
+    e.target.classList.add("key-normal");
     let clientX = e.changedTouches[e.changedTouches.length - 1].clientX;
     let clientY = e.changedTouches[e.changedTouches.length - 1].clientY;
     let submittedAngle =

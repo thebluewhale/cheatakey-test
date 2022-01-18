@@ -11,7 +11,14 @@
 }
 
 .key {
-  background-color: $light-purple;
   width: 50px;
   height: 40px;
+}
+
+.key-normal {
+  background-color: $light-purple;
+}
+
+.key-pressed {
+  background-color: $purple;
 }
