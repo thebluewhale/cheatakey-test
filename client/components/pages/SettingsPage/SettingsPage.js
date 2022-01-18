@@ -107,6 +107,7 @@ export default function SettingsPage() {
                 className="validate"
                 value={nickName}
                 onChange={onNickNameInputchanged}
+                autoComplete="off"
               />
               <label htmlFor="nickName">Nick Name</label>
             </div>

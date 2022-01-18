@@ -200,6 +200,7 @@ export default function TestPage() {
               onChange={onSubmitInputChanged}
               onKeyDown={onSubmitInputKeyDown}
               ref={submitInput}
+              autoComplete="off"
             />
             <label htmlFor="submitter">Type here</label>
           </div>
