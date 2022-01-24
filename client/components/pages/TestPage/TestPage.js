@@ -132,7 +132,7 @@ export default function TestPage() {
   }, [extractedLists]);
 
   useEffect(() => {
-    if (progress == maxProgress - 1) {
+    if (progress == maxProgress) {
       dispatch(push("/terminate"));
     }
     setPresentedText(extractedLists[progress]);
@@ -180,9 +180,7 @@ export default function TestPage() {
         </div>
       </div>
       <div className="col s12">
-        <h6 className="right">{`${progress + 1} / ${
-          extractedLists.length
-        }`}</h6>
+        <h6 className="right">{`${progress} / ${extractedLists.length}`}</h6>
       </div>
       <div className="col s12">
         <div className="card-panel purple lighten-5">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { attempToPostGestureResult } from "_thunks/tests";
@@ -113,9 +113,6 @@ export default function DirectionPage() {
       .then(() => {
         let tempArr = [];
         if (gestureDirectionIndex == 7) {
-          if (testSetCount == 8) {
-            dispatch(push("/terminate"));
-          }
           if (testSetCount == 2 || testSetCount == 5) {
             tempArr = [0, 1, 2];
             shuffle(tempArr);
@@ -140,6 +137,12 @@ export default function DirectionPage() {
       });
   };
 
+  useEffect(() => {
+    if (progress == MAX_PROGRESS) {
+      dispatch(push("/terminate"));
+    }
+  }, [progress]);
+
   return (
     <div className="direction-page">
       <div className="row">
@@ -152,7 +155,7 @@ export default function DirectionPage() {
           </div>
         </div>
         <div className="col s12">
-          <h6 className="right">{`${progress + 1} / ${MAX_PROGRESS}`}</h6>
+          <h6 className="right">{`${progress} / ${MAX_PROGRESS}`}</h6>
         </div>
       </div>
       <div className="command-container">

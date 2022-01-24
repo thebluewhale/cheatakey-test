@@ -132,8 +132,6 @@ export default function VowelKeyTypePage() {
           if (testSetCount == 8) {
             setVowelKeyImageSrc("vowel_key_type_3");
             M.Modal.init(document.getElementById("modal1")).open();
-          } else if (testSetCount == 15) {
-            dispatch(push("/terminate"));
           }
           if (testSetCount == 2 || testSetCount == 5) {
             tempArr = [0, 1, 2];
@@ -163,6 +161,12 @@ export default function VowelKeyTypePage() {
     M.Modal.init(document.querySelectorAll(".modal"));
   }, []);
 
+  useEffect(() => {
+    if (progress == MAX_PROGRESS) {
+      dispatch(push("/terminate"));
+    }
+  }, [progress]);
+
   return (
     <div className="vowel-key-type-page">
       <div className="row">
@@ -175,7 +179,7 @@ export default function VowelKeyTypePage() {
           </div>
         </div>
         <div className="col s12">
-          <h6 className="right">{`${progress + 1} / ${MAX_PROGRESS}`}</h6>
+          <h6 className="right">{`${progress} / ${MAX_PROGRESS}`}</h6>
         </div>
       </div>
       <div className="">
