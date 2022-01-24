@@ -14,6 +14,7 @@ import TestPage from "_pages/TestPage";
 import TerminatePage from "_pages/TerminatePage";
 import ErrorPage from "_pages/ErrorPage";
 import DirectionPage from "_pages/DirectionPage";
+import VowelKeyTypePage from "_pages/VowelKeyTypePage";
 import NavigationBar from "_organisms/NavigationBar";
 import Footer from "_organisms/Footer";
 
@@ -44,6 +45,7 @@ export default function Main({ location }) {
           <Route exact path="/terminate" component={TerminatePage} />
           <Route exact path="/error" component={ErrorPage} />
           <Route exact path="/direction" component={DirectionPage} />
+          <Route exact path="/vowel_key_type" component={VowelKeyTypePage} />
           <Route path="*" component={LostPage} />
         </Switch>
       </div>

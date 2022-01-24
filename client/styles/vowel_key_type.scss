@@ -1,0 +1,25 @@
+.vowel-key-type-page {
+}
+
+.key {
+  width: 50px;
+  height: 40px;
+}
+
+.vowel-key-type-page .key-container {
+  padding: 150px 0 0 0;
+  bottom: 0;
+}
+
+.key-normal {
+  background-color: $light-purple;
+}
+
+.key-pressed {
+  background-color: $purple;
+}
+
+.vowel-img {
+  max-width: 150px;
+  max-height: 150px;
+}

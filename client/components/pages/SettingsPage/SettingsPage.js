@@ -10,6 +10,7 @@ import {
   TEST_TYPE_CTK_PRACTICE,
   TEST_TYPE_CTK_FINAL,
   TEST_TYPE_CTK_DIRECTION,
+  TEST_TYPE_CTK_VOWEL_KEY_TYPE,
 } from "_utils/variables";
 import M from "materialize-css";
 
@@ -22,7 +23,10 @@ export default function SettingsPage() {
 
   const onTestTypeSelectChange = (e) => {
     setSelectedTestType(e.target.value);
-    if (e.target.value == TEST_TYPE_CTK_DIRECTION) {
+    if (
+      e.target.value == TEST_TYPE_CTK_DIRECTION ||
+      e.target.value == TEST_TYPE_CTK_VOWEL_KEY_TYPE
+    ) {
       setHideOnDirectionTest(true);
     } else {
       setHideOnDirectionTest(false);
@@ -34,14 +38,21 @@ export default function SettingsPage() {
   };
 
   const onSubmitVariables = () => {
-    if (selectedTestType == TEST_TYPE_CTK_DIRECTION) {
+    if (
+      selectedTestType == TEST_TYPE_CTK_DIRECTION ||
+      selectedTestType == TEST_TYPE_CTK_VOWEL_KEY_TYPE
+    ) {
       if (nickName == "") {
         M.Modal.init(document.getElementById("modal1")).open();
       } else {
         dispatch(
           attemptToSetTesterVariables(selectedTestType, "NONE", nickName)
         ).then(() => {
-          dispatch(push("/direction"));
+          if (selectedTestType == TEST_TYPE_CTK_DIRECTION) {
+            dispatch(push("/direction"));
+          } else {
+            dispatch(push("/vowel_key_type"));
+          }
         });
       }
     } else {
@@ -89,6 +100,9 @@ export default function SettingsPage() {
           <option value={TEST_TYPE_CTK_PRACTICE}>CheatA-Key Practice</option>
           <option value={TEST_TYPE_CTK_FINAL}>Final CheatA-Key Test</option>
           <option value={TEST_TYPE_CTK_DIRECTION}>Direction Test</option>
+          <option value={TEST_TYPE_CTK_VOWEL_KEY_TYPE}>
+            VOWEL-KEY type test
+          </option>
         </select>
         <label>Test type</label>
       </div>
