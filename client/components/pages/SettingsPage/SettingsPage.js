@@ -35,7 +35,15 @@ export default function SettingsPage() {
 
   const onSubmitVariables = () => {
     if (selectedTestType == TEST_TYPE_CTK_DIRECTION) {
-      dispatch(push("/direction"));
+      if (nickName == "") {
+        M.Modal.init(document.getElementById("modal1")).open();
+      } else {
+        dispatch(
+          attemptToSetTesterVariables(selectedTestType, "NONE", nickName)
+        ).then(() => {
+          dispatch(push("/direction"));
+        });
+      }
     } else {
       if (
         selectedTestType == "" ||
@@ -85,35 +93,31 @@ export default function SettingsPage() {
         <label>Test type</label>
       </div>
       {hideOnDirectionTest ? null : (
-        <div>
-          <div className="input-field col s12">
-            <select
-              defaultValue="keyboard-type-default"
-              onChange={onKeyboardTypeSelectChange}
-            >
-              <option value="keyboard-type-default" disabled>
-                Choose keyboard type
-              </option>
-              <option value={KEYBOARD_TYPE_QWERTY}>QWERTY</option>
-              <option value={KEYBOARD_TYPE_CHEATAKEY}>CheatA-Key</option>
-            </select>
-            <label>Keyboard type</label>
-          </div>
-          <div className="col s12">
-            <div className="input-field">
-              <input
-                id="nickName"
-                type="text"
-                className="validate"
-                value={nickName}
-                onChange={onNickNameInputchanged}
-                autoComplete="off"
-              />
-              <label htmlFor="nickName">Nick Name</label>
-            </div>
-          </div>
+        <div className="input-field col s12">
+          <select
+            defaultValue="keyboard-type-default"
+            onChange={onKeyboardTypeSelectChange}
+          >
+            <option value="keyboard-type-default" disabled>
+              Choose keyboard type
+            </option>
+            <option value={KEYBOARD_TYPE_QWERTY}>QWERTY</option>
+            <option value={KEYBOARD_TYPE_CHEATAKEY}>CheatA-Key</option>
+          </select>
+          <label>Keyboard type</label>
         </div>
       )}
+      <div className="input-field col s12">
+        <input
+          id="nickName"
+          type="text"
+          className="validate"
+          value={nickName}
+          onChange={onNickNameInputchanged}
+          autoComplete="off"
+        />
+        <label htmlFor="nickName">Nick Name</label>
+      </div>
       <div className="col s12">
         <button
           className="btn waves-effect waves-light purple lighten-2"

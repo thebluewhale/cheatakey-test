@@ -13,6 +13,10 @@ const gestureData = new Schema({
     type: String,
     trim: true,
   },
+  nickName: {
+    type: String,
+    trim: true,
+  },
   created: {
     type: Date,
     default: Date.now,

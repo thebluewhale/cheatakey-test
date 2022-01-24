@@ -59,6 +59,7 @@ router.post("/gesture", (req, res) => {
     touchEndY,
     submittedAngle,
     presentedAngle,
+    nickName,
     testType,
   } = req.body;
   let newGesture = new Gesture({
@@ -68,6 +69,7 @@ router.post("/gesture", (req, res) => {
     touchEndY: touchEndY,
     submittedAngle: submittedAngle,
     presentedAngle: presentedAngle,
+    nickName: nickName,
     testType: testType,
   });
   newGesture.save((err) => {

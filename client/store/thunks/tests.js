@@ -61,6 +61,7 @@ export const attempToPostGestureResult =
     touchEndY,
     submittedAngle,
     presentedAngle,
+    nickName,
     testType
   ) =>
   (dispatch) =>
@@ -71,6 +72,7 @@ export const attempToPostGestureResult =
       touchEndY,
       submittedAngle,
       presentedAngle,
+      nickName,
       testType,
     })
       .then((data) => {

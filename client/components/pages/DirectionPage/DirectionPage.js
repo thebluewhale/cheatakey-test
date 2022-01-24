@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { attempToPostGestureResult } from "_thunks/tests";
 import { TEST_TYPE_CTK_DIRECTION } from "_utils/variables";
@@ -7,6 +7,7 @@ import R from "ramda";
 
 export default function DirectionPage() {
   const dispatch = useDispatch();
+  const variables = useSelector((state) => state.tests.variables);
   const [gestureDirectionIndex, setGestureDirectionIndex] = useState(0);
   const [gestureDirectionArr, setGestureDirectionArr] = useState([
     0, 1, 2, 3, 4, 5, 6, 7,
@@ -104,6 +105,7 @@ export default function DirectionPage() {
         clientY,
         submittedAngle,
         gestureDirectionArr[gestureDirectionIndex],
+        variables.nickName,
         TEST_TYPE_CTK_DIRECTION
       )
     )

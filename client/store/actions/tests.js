@@ -48,6 +48,7 @@ export const postGestureResult = ({
   touchEndY,
   submittedAngle,
   presentedAngle,
+  nickName,
   testType,
 }) => ({
   type: POST_GESTURE_RESULT,
@@ -57,5 +58,6 @@ export const postGestureResult = ({
   touchEndY,
   submittedAngle,
   presentedAngle,
+  nickName,
   testType,
 });
