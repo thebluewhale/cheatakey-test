@@ -27,10 +27,14 @@ export default function TestPage() {
   const [speed, setSpeed] = useState(0.0);
   const [isStarted, setIsStarted] = useState(false);
   const [isErrorTypoReported, setIsErrorTypoReported] = useState(false);
+  const [lastInputValueLength, setLastInputValueLength] = useState(0);
   const submitInput = useRef();
 
-  const onSubmitInputKeyDown = (e) => {
-    if (e.key == "Backspace" && isErrorTypoReported == false) {
+  const onSubmitInputChanged = (e) => {
+    if (
+      e.target.value.length <= lastInputValueLength &&
+      isErrorTypoReported == false
+    ) {
       setIsErrorTypoReported(true);
       dispatch(
         attempToPostTestResult(
@@ -47,25 +51,24 @@ export default function TestPage() {
       )
         .catch(R.identity())
         .then(() => {});
-    } else if (e.key != "Backspace" && isErrorTypoReported == true) {
+    } else if (
+      e.target.value.length > lastInputValueLength &&
+      isErrorTypoReported == true
+    ) {
       setIsErrorTypoReported(false);
     }
 
-    // if (e.key == "Backspace") {
-    //   e.preventDefault();
-    // }
-  };
-
-  const onSubmitInputChanged = (e) => {
     if (e.target.value.length == 1 && isStarted == false) {
       setStartTime(new Date());
       setIsStarted(true);
     }
     setSubmittedText(e.target.value.toLowerCase());
+    setLastInputValueLength(e.target.value.length);
   };
 
   const onSubmitText = () => {
     setProgress(progress + 1);
+    setLastInputValueLength(0);
     let endTime = new Date();
     let leadTime = endTime.getTime() - startTime.getTime();
     dispatch(
@@ -196,7 +199,6 @@ export default function TestPage() {
               className="validate"
               value={submittedText}
               onChange={onSubmitInputChanged}
-              onKeyDown={onSubmitInputKeyDown}
               ref={submitInput}
               autoComplete="off"
             />
