@@ -20,6 +20,7 @@ export default function CallibrationPage() {
   const [testSetCount, setTestSetCount] = useState(0);
   const [progress, setProgress] = useState(0);
   const [vowelKeyImageSrc, setVowelKeyImageSrc] = useState("vowel_key_type_2");
+  const [isTerminated, setIsTerminated] = useState(false);
   const MAX_PROGRESS = 40;
 
   const shuffle = (array) => {
@@ -190,11 +191,21 @@ export default function CallibrationPage() {
 
   useEffect(() => {
     if (progress == MAX_PROGRESS) {
-      dispatch(push("/terminate"));
+      // dispatch(push("/terminate"));
+      setIsTerminated(true);
     }
   }, [progress]);
 
-  return (
+  return isTerminated ? (
+    <div className="row">
+      <div className="col s12">
+        <div className="card-panel grey lighten-3">
+          <h5 className="purple-text">Thank you.</h5>
+          <h6 className="purple-text">Callibration is done.</h6>
+        </div>
+      </div>
+    </div>
+  ) : (
     <div className="vowel-key-type-page">
       <div className="row">
         <div className="col s12">
