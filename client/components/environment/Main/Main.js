@@ -15,6 +15,7 @@ import TerminatePage from "_pages/TerminatePage";
 import ErrorPage from "_pages/ErrorPage";
 import DirectionPage from "_pages/DirectionPage";
 import VowelKeyTypePage from "_pages/VowelKeyTypePage";
+import CallibrationPage from "_pages/CallibrationPage";
 import NavigationBar from "_organisms/NavigationBar";
 import Footer from "_organisms/Footer";
 
@@ -34,7 +35,7 @@ export default function Main({ location }) {
   return (
     <div>
       <ReactNotification />
-      <NavigationBar />
+      {/* <NavigationBar /> */}
       <div className="main container">
         <Switch>
           <Route exact path="/" component={HomePage} />
@@ -46,6 +47,7 @@ export default function Main({ location }) {
           <Route exact path="/error" component={ErrorPage} />
           <Route exact path="/direction" component={DirectionPage} />
           <Route exact path="/vowel_key_type" component={VowelKeyTypePage} />
+          <Route exact path="/callibration" component={CallibrationPage} />
           <Route path="*" component={LostPage} />
         </Switch>
       </div>
