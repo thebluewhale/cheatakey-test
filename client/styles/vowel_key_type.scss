@@ -4,6 +4,7 @@
 .key {
   width: 50px;
   height: 40px;
+  border-radius: 5px;
 }
 
 .vowel-key-type-page .key-container {
@@ -12,11 +13,11 @@
 }
 
 .key-normal {
-  background-color: $light-purple;
+  background-color: $light-orange;
 }
 
 .key-pressed {
-  background-color: $purple;
+  background-color: $orange;
 }
 
 .vowel-img {

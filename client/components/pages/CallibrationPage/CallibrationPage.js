@@ -231,7 +231,7 @@ export default function CallibrationPage() {
             ></img>
           </div>
         </div>
-        <div className="center-align purple-text">
+        <div className="center-align orange-text">
           {displayText(gestureDirectionArr[gestureDirectionIndex])}
         </div>
       </div>
