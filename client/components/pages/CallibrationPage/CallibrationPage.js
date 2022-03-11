@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { attempToPostGestureResult } from "_thunks/tests";
 import { TEST_TYPE_CTK_VOWEL_KEY_TYPE } from "_utils/variables";
+import { ResponsivePie } from "@nivo/pie";
 import R from "ramda";
 import M from "materialize-css";
 
@@ -21,7 +22,8 @@ export default function CallibrationPage() {
   const [progress, setProgress] = useState(0);
   const [vowelKeyImageSrc, setVowelKeyImageSrc] = useState("vowel_key_type_2");
   const [isTerminated, setIsTerminated] = useState(false);
-  const MAX_PROGRESS = 40;
+  const [chartData, setChartData] = useState([]);
+  const MAX_PROGRESS = 15;
 
   const shuffle = (array) => {
     for (let index = array.length - 1; index > 0; index--) {
@@ -96,6 +98,35 @@ export default function CallibrationPage() {
     }
   };
 
+  const PieChartGenerator = (data) => {
+    console.log("piechart generator");
+    return (
+      <ResponsivePie
+        data={data}
+        margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+        innerRadius={0.05}
+        padAngle={1}
+        cornerRadius={3}
+        activeOuterRadiusOffset={8}
+        colors={{ scheme: "category10" }}
+        borderWidth={1}
+        borderColor={{
+          from: "color",
+          modifiers: [["darker", 0.2]],
+        }}
+        arcLinkLabelsSkipAngle={10}
+        arcLinkLabelsTextColor="#333333"
+        arcLinkLabelsThickness={2}
+        arcLinkLabelsColor={{ from: "color" }}
+        arcLabelsSkipAngle={10}
+        arcLabelsTextColor={{
+          from: "color",
+          modifiers: [["darker", 2]],
+        }}
+      />
+    );
+  };
+
   const touchStart = (e) => {
     e.target.classList.remove("key-normal");
     e.target.classList.add("key-pressed");
@@ -114,54 +145,8 @@ export default function CallibrationPage() {
       Math.atan2(clientY - touchStartY, clientX - touchStartX) *
       (180 / Math.PI);
     if (submittedAngle < 0.0) submittedAngle += 360.0;
-    // dispatch(
-    //   attempToPostGestureResult(
-    //     touchStartX,
-    //     touchStartY,
-    //     clientX,
-    //     clientY,
-    //     submittedAngle,
-    //     gestureDirectionArr[gestureDirectionIndex],
-    //     variables.nickName,
-    //     TEST_TYPE_CTK_VOWEL_KEY_TYPE
-    //   )
-    // )
-    //   .catch(R.identity())
-    //   .then(() => {
-    //     let tempArr = [];
-    //     if (gestureDirectionIndex == 4) {
-    //       if (testSetCount == 8) {
-    //         setVowelKeyImageSrc("vowel_key_type_3");
-    //         M.Modal.init(document.getElementById("modal1")).open();
-    //       }
-    //       if (testSetCount == 2 || testSetCount == 5) {
-    //         tempArr = [0, 1, 2];
-    //         shuffle(tempArr);
-    //         setKeyIndexArr(tempArr);
-    //       }
-    //       setTestSetCount(testSetCount + 1);
-
-    //       if (keyIndex == 2) {
-    //         setKeyIndex(0);
-    //       } else {
-    //         setKeyIndex(keyIndex + 1);
-    //       }
-
-    //       tempArr = [0, 1, 2, 3, 4];
-    //       shuffle(tempArr);
-    //       setGestureDirectionArr(tempArr);
-    //       setGestureDirectionIndex(0);
-    //     } else {
-    //       setGestureDirectionIndex(gestureDirectionIndex + 1);
-    //     }
-    //     setProgress(progress + 1);
-    //   });
     let tempArr = [];
     if (gestureDirectionIndex == 4) {
-      // if (testSetCount == 8) {
-      //   setVowelKeyImageSrc("vowel_key_type_3");
-      //   M.Modal.init(document.getElementById("modal1")).open();
-      // }
       if (testSetCount == 2 || testSetCount == 5) {
         tempArr = [0, 1, 2];
         shuffle(tempArr);
@@ -191,22 +176,56 @@ export default function CallibrationPage() {
 
   useEffect(() => {
     if (progress == MAX_PROGRESS) {
-      // dispatch(push("/terminate"));
       setIsTerminated(true);
+      setChartData([
+        {
+          id: "java",
+          label: "java",
+          value: 305,
+          color: "hsl(225, 70%, 50%)",
+        },
+        {
+          id: "scala",
+          label: "scala",
+          value: 436,
+          color: "hsl(168, 70%, 50%)",
+        },
+        {
+          id: "haskell",
+          label: "haskell",
+          value: 187,
+          color: "hsl(206, 70%, 50%)",
+        },
+        {
+          id: "stylus",
+          label: "stylus",
+          value: 539,
+          color: "hsl(206, 70%, 50%)",
+        },
+        {
+          id: "sass",
+          label: "sass",
+          value: 132,
+          color: "hsl(97, 70%, 50%)",
+        },
+      ]);
     }
   }, [progress]);
 
   return isTerminated ? (
-    <div className="row">
+    <div className="row callibration-page">
       <div className="col s12">
         <div className="card-panel grey lighten-3">
           <h5 className="purple-text">Thank you.</h5>
           <h6 className="purple-text">Callibration is done.</h6>
         </div>
       </div>
+      <div className="col s12">
+        <div className="chart-container">{PieChartGenerator(chartData)}</div>
+      </div>
     </div>
   ) : (
-    <div className="vowel-key-type-page">
+    <div className="callibration-page">
       <div className="row">
         <div className="col s12">
           <div className="progress">
@@ -237,20 +256,6 @@ export default function CallibrationPage() {
       </div>
       <div className="row key-container">
         {displayKey(keyIndexArr[keyIndex])}
-      </div>
-      <div id="modal1" className="modal">
-        <div className="modal-content">
-          <h5>Key type has changed.</h5>
-          <h5>After confirmation, proceed the test.</h5>
-        </div>
-        <div className="modal-footer">
-          <a
-            href="#!"
-            className="modal-close waves-effect waves-purple lighten-2 btn-flat"
-          >
-            OK
-          </a>
-        </div>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-.vowel-key-type-page {
+.callibration-page {
 }
 
 .key {
@@ -7,20 +7,25 @@
   border-radius: 5px;
 }
 
-.vowel-key-type-page .key-container {
+.callibration-page .key-container {
   padding: 150px 0 0 0;
   bottom: 0;
 }
 
-.vowel-key-type-page .key-normal {
+.callibration-page .key-normal {
   background-color: $light-orange;
 }
 
-.vowel-key-type-page .key-pressed {
+.callibration-page .key-pressed {
   background-color: $orange;
 }
 
-.vowel-key-type-page .vowel-img {
+.callibration-page .vowel-img {
   max-width: 150px;
   max-height: 150px;
+}
+
+.chart-container {
+  width: 90vw;
+  height: 50vh;
 }
