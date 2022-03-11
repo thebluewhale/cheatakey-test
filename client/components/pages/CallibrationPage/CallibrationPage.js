@@ -21,7 +21,7 @@ export default function CallibrationPage() {
   const [progress, setProgress] = useState(0);
   const [vowelKeyImageSrc, setVowelKeyImageSrc] = useState("vowel_key_type_2");
   const [isTerminated, setIsTerminated] = useState(false);
-  const MAX_PROGRESS = 40;
+  const MAX_PROGRESS = 15;
 
   const shuffle = (array) => {
     for (let index = array.length - 1; index > 0; index--) {
@@ -114,54 +114,8 @@ export default function CallibrationPage() {
       Math.atan2(clientY - touchStartY, clientX - touchStartX) *
       (180 / Math.PI);
     if (submittedAngle < 0.0) submittedAngle += 360.0;
-    // dispatch(
-    //   attempToPostGestureResult(
-    //     touchStartX,
-    //     touchStartY,
-    //     clientX,
-    //     clientY,
-    //     submittedAngle,
-    //     gestureDirectionArr[gestureDirectionIndex],
-    //     variables.nickName,
-    //     TEST_TYPE_CTK_VOWEL_KEY_TYPE
-    //   )
-    // )
-    //   .catch(R.identity())
-    //   .then(() => {
-    //     let tempArr = [];
-    //     if (gestureDirectionIndex == 4) {
-    //       if (testSetCount == 8) {
-    //         setVowelKeyImageSrc("vowel_key_type_3");
-    //         M.Modal.init(document.getElementById("modal1")).open();
-    //       }
-    //       if (testSetCount == 2 || testSetCount == 5) {
-    //         tempArr = [0, 1, 2];
-    //         shuffle(tempArr);
-    //         setKeyIndexArr(tempArr);
-    //       }
-    //       setTestSetCount(testSetCount + 1);
-
-    //       if (keyIndex == 2) {
-    //         setKeyIndex(0);
-    //       } else {
-    //         setKeyIndex(keyIndex + 1);
-    //       }
-
-    //       tempArr = [0, 1, 2, 3, 4];
-    //       shuffle(tempArr);
-    //       setGestureDirectionArr(tempArr);
-    //       setGestureDirectionIndex(0);
-    //     } else {
-    //       setGestureDirectionIndex(gestureDirectionIndex + 1);
-    //     }
-    //     setProgress(progress + 1);
-    //   });
     let tempArr = [];
     if (gestureDirectionIndex == 4) {
-      // if (testSetCount == 8) {
-      //   setVowelKeyImageSrc("vowel_key_type_3");
-      //   M.Modal.init(document.getElementById("modal1")).open();
-      // }
       if (testSetCount == 2 || testSetCount == 5) {
         tempArr = [0, 1, 2];
         shuffle(tempArr);
@@ -191,7 +145,6 @@ export default function CallibrationPage() {
 
   useEffect(() => {
     if (progress == MAX_PROGRESS) {
-      // dispatch(push("/terminate"));
       setIsTerminated(true);
     }
   }, [progress]);
@@ -200,8 +153,8 @@ export default function CallibrationPage() {
     <div className="row">
       <div className="col s12">
         <div className="card-panel grey lighten-3">
-          <h5 className="purple-text">Thank you.</h5>
-          <h6 className="purple-text">Callibration is done.</h6>
+          <h5 className="orange-text text-darken-2">Thank you.</h5>
+          <h6 className="orange-text text-darken-2">Callibration is done.</h6>
         </div>
       </div>
     </div>
@@ -237,20 +190,6 @@ export default function CallibrationPage() {
       </div>
       <div className="row key-container">
         {displayKey(keyIndexArr[keyIndex])}
-      </div>
-      <div id="modal1" className="modal">
-        <div className="modal-content">
-          <h5>Key type has changed.</h5>
-          <h5>After confirmation, proceed the test.</h5>
-        </div>
-        <div className="modal-footer">
-          <a
-            href="#!"
-            className="modal-close waves-effect waves-purple lighten-2 btn-flat"
-          >
-            OK
-          </a>
-        </div>
       </div>
     </div>
   );

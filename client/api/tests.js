@@ -29,3 +29,10 @@ export const postGestureResult = (result) =>
     .send(result)
     .then(handleSuccess)
     .catch(handleError);
+
+export const postCallibrationData = (callibrationData) =>
+  request
+    .post("/api/test/callibration")
+    .send(callibrationData)
+    .then(handleSuccess)
+    .catch(handleError);

@@ -3,6 +3,7 @@ import {
   postTestResult,
   postTesterVariables,
   postGestureResult,
+  postCallibrationData,
 } from "_api/tests";
 import { setTestLists, setTesterVariables } from "_actions/tests";
 import { dispatchError } from "_utils/api";
@@ -79,3 +80,12 @@ export const attempToPostGestureResult =
         return data;
       })
       .catch(dispatchError(dispatch));
+
+export const attempToPostCallibrationData = (callibrationData) => (dispatch) =>
+  postCallibrationData({
+    callibrationData,
+  })
+    .then((data) => {
+      return data;
+    })
+    .catch(dispatchError(dispatch));

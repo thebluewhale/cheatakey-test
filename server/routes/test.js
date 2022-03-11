@@ -1,6 +1,7 @@
 const express = require("express");
 const testSet = require("../testSet/testSet");
 const { Result, Gesture } = require("../database/schemas");
+const { spawn } = require("child_process");
 
 const router = express.Router();
 
@@ -79,4 +80,18 @@ router.post("/gesture", (req, res) => {
       res.send({ message: "Test result posting success" });
     }
   });
+});
+
+router.post("/callibration", (req, res) => {
+  const { callibrationData } = req.body;
+
+  const python = spawn("python", ["../database/graphy.py"]);
+
+  // newGesture.save((err) => {
+  //   if (err) {
+  //     console.log(err);
+  //   } else {
+  //     res.send({ message: "Test result posting success" });
+  //   }
+  // });
 });
