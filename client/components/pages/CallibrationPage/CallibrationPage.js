@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
+import { useHistory } from "react-router-dom";
 import { attempToPostGestureResult } from "_thunks/tests";
 import { TEST_TYPE_CTK_VOWEL_KEY_TYPE } from "_utils/variables";
 import { ResponsivePie } from "@nivo/pie";
@@ -10,6 +11,7 @@ import M from "materialize-css";
 export default function CallibrationPage() {
   const dispatch = useDispatch();
   const variables = useSelector((state) => state.tests.variables);
+  const history = useHistory();
   const [gestureDirectionIndex, setGestureDirectionIndex] = useState(0);
   const [gestureDirectionArr, setGestureDirectionArr] = useState([
     0, 1, 2, 3, 4,
@@ -118,9 +120,6 @@ export default function CallibrationPage() {
   };
 
   const PieChartGenerator = (data) => {
-    callibrationData.map((item) => {
-      console.log(item.min, item.max);
-    });
     return (
       <ResponsivePie
         data={data}
@@ -165,11 +164,9 @@ export default function CallibrationPage() {
     switch (alphabetIndex) {
       case ALPHABET_IDNEX_A: // for a : 240 - 315
         if (degree < 240 && degree > 195) {
-          console.log("min++");
           cbd[ALPHABET_IDNEX_A].min++;
           cbd[ALPHABET_IDNEX_O].max--;
         } else if (degree > 315 && degree < 360) {
-          console.log("max++");
           cbd[ALPHABET_IDNEX_A].max++;
           cbd[ALPHABET_IDNEX_I].min--;
         }
@@ -177,11 +174,9 @@ export default function CallibrationPage() {
         return;
       case ALPHABET_IDNEX_E: // for e : 45 - 120
         if (degree < 45 && degree > 90) {
-          console.log("min++");
           cbd[ALPHABET_IDNEX_E].min++;
           cbd[ALPHABET_IDNEX_I].max--;
         } else if (degree > 120 && degree < 165) {
-          console.log("max++");
           cbd[ALPHABET_IDNEX_E].max++;
           cbd[ALPHABET_IDNEX_U].min--;
         }
@@ -189,11 +184,9 @@ export default function CallibrationPage() {
         return;
       case ALPHABET_IDNEX_I: //for i : 315-45
         if (degree < 315 && degree > 270) {
-          console.log("min++");
           cbd[ALPHABET_IDNEX_I].min++;
           cbd[ALPHABET_IDNEX_A].max--;
         } else if (degree > 45 && degree < 90) {
-          console.log("max++");
           cbd[ALPHABET_IDNEX_I].max++;
           cbd[ALPHABET_IDNEX_E].min--;
         }
@@ -201,11 +194,9 @@ export default function CallibrationPage() {
         return;
       case ALPHABET_IDNEX_O: //for o : 180 - 240
         if (degree < 180 && degree > 135) {
-          console.log("min++");
           cbd[ALPHABET_IDNEX_O].min++;
           cbd[ALPHABET_IDNEX_U].max--;
         } else if (degree > 240 && degree < 285) {
-          console.log("max++");
           cbd[ALPHABET_IDNEX_O].max++;
           cbd[ALPHABET_IDNEX_A].min--;
         }
@@ -213,11 +204,9 @@ export default function CallibrationPage() {
         return;
       case ALPHABET_IDNEX_U: //for u : 120 - 180
         if (degree < 120 && degree > 75) {
-          console.log("min++");
           cbd[ALPHABET_IDNEX_U].min++;
           cbd[ALPHABET_IDNEX_E].max--;
         } else if (degree > 180 && degree < 225) {
-          console.log("max++");
           cbd[ALPHABET_IDNEX_U].max++;
           cbd[ALPHABET_IDNEX_O].min--;
         }
@@ -280,6 +269,10 @@ export default function CallibrationPage() {
 
   useEffect(() => {
     M.Modal.init(document.querySelectorAll(".modal"));
+
+    return () => {
+      window.close();
+    };
   }, []);
 
   useEffect(() => {
