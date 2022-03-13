@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import R from "ramda";
 import qs from "qs";
 import { attemptToGetTestLists } from "_thunks/tests";
-import { push } from "connected-react-router";
+import { push, replace } from "connected-react-router";
 
 export default function HomePage() {
   const dispatch = useDispatch();
