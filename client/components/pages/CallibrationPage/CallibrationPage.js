@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
-import { useHistory } from "react-router-dom";
 import { attempToPostGestureResult } from "_thunks/tests";
 import { TEST_TYPE_CTK_VOWEL_KEY_TYPE } from "_utils/variables";
 import { ResponsivePie } from "@nivo/pie";
@@ -11,7 +10,6 @@ import M from "materialize-css";
 export default function CallibrationPage() {
   const dispatch = useDispatch();
   const variables = useSelector((state) => state.tests.variables);
-  const history = useHistory();
   const [gestureDirectionIndex, setGestureDirectionIndex] = useState(0);
   const [gestureDirectionArr, setGestureDirectionArr] = useState([
     0, 1, 2, 3, 4,
@@ -267,12 +265,12 @@ export default function CallibrationPage() {
     setProgress(progress + 1);
   };
 
+  const onExitButtonClick = () => {
+    window.close();
+  };
+
   useEffect(() => {
     M.Modal.init(document.querySelectorAll(".modal"));
-
-    return () => {
-      window.close();
-    };
   }, []);
 
   useEffect(() => {
@@ -339,6 +337,13 @@ export default function CallibrationPage() {
       </div>
       <div className="col s12">
         <div className="chart-container">{PieChartGenerator(chartData)}</div>
+      </div>
+      <div className="col s12">
+        <div className="right-align">
+          <div className="btn orange" onClick={onExitButtonClick}>
+            Exit
+          </div>
+        </div>
       </div>
     </div>
   ) : (
