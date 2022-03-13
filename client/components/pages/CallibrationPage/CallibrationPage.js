@@ -265,10 +265,6 @@ export default function CallibrationPage() {
     setProgress(progress + 1);
   };
 
-  const onExitButtonClick = () => {
-    window.close();
-  };
-
   useEffect(() => {
     M.Modal.init(document.querySelectorAll(".modal"));
   }, []);
@@ -337,13 +333,6 @@ export default function CallibrationPage() {
       </div>
       <div className="col s12">
         <div className="chart-container">{PieChartGenerator(chartData)}</div>
-      </div>
-      <div className="col s12">
-        <div className="right-align">
-          <div className="btn orange" onClick={onExitButtonClick}>
-            Exit
-          </div>
-        </div>
       </div>
     </div>
   ) : (
