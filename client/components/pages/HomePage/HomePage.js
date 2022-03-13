@@ -17,7 +17,8 @@ export default function HomePage() {
 
   useEffect(() => {
     if (queryData.caller == "mobile") {
-      dispatch(replace("/callibration"));
+      // dispatch(replace("/callibration"));
+      dispatch(push("/callibration"));
     } else {
       dispatch(attemptToGetTestLists())
         .catch(R.identity())
