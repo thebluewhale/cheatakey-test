@@ -14,10 +14,16 @@ export default function HomePage() {
   const [preloadImgClass, setPreloadImgClass] = useState("");
   const location = useLocation();
   const queryData = qs.parse(location.search, { ignoreQueryPrefix: true });
+  const [callibrationDoneState, setCallibrationDoneState] = useState(false);
 
   useEffect(() => {
     if (queryData.caller == "mobile") {
-      dispatch(push("/callibration"));
+      if (callibrationDoneState == false) {
+        setCallibrationDoneState(true);
+        dispatch(push("/callibration"));
+      } else {
+        window.close();
+      }
     } else {
       dispatch(attemptToGetTestLists())
         .catch(R.identity())
