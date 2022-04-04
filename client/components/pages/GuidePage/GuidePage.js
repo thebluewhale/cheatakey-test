@@ -2,10 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
-  TEST_TYPE_QWERTY,
-  TEST_TYPE_CTK_FIRST,
-  TEST_TYPE_CTK_PRACTICE,
-  TEST_TYPE_CTK_FINAL,
+  KEYBOARD_TYPE_QWERTY,
+  KEYBOARD_TYPE_CHEATAKEY,
+  KEYBOARD_TYPE_GBOARD,
+  TEST_TYPE_PART_B_QWERTY,
+  TEST_TYPE_PART_B_GBOARD,
+  TEST_TYPE_PART_C_CHEATAKEY,
+  TEST_TYPE_PART_D_CHEATAKEY,
+  TEST_TYPE_PART_E_CHEATAKEY,
+  TEST_TYPE_PART_E_CHEATAKEY_ONEHAND,
+  TEST_TYPE_PART_E_QWERTY_ONEHAND,
+  TEST_TYPE_PART_E_GBOARD_ONEHAND,
 } from "_utils/variables";
 
 export default function GuidePage() {
@@ -14,29 +21,41 @@ export default function GuidePage() {
 
   const convertTestTypeToTitle = (testType) => {
     switch (testType) {
-      case TEST_TYPE_QWERTY:
-        return "QWERTY Test";
-      case TEST_TYPE_CTK_FIRST:
-        return "First CheatA-Key Test";
-      case TEST_TYPE_CTK_PRACTICE:
-        return "CheatA-Key Practice";
-      case TEST_TYPE_CTK_FINAL:
-        return "Final CheatA-Key Test";
+      case TEST_TYPE_PART_B_QWERTY:
+        return "Part B : First QWERTY test";
+      case TEST_TYPE_PART_B_GBOARD:
+        return "Part B : First Gboard test";
+      case TEST_TYPE_PART_C_CHEATAKEY:
+        return "Part C : First new keyboard test";
+      case TEST_TYPE_PART_D_CHEATAKEY:
+        return "PART D : New keyboard practice";
+      case TEST_TYPE_PART_E_CHEATAKEY:
+        return "PART E : Final new keyboard test";
+      case TEST_TYPE_PART_E_CHEATAKEY_ONEHAND:
+        return "PART E : One hand new keyboard test";
+      case TEST_TYPE_PART_E_QWERTY_ONEHAND:
+        return "PART E : One hand QWERTY test";
+      case TEST_TYPE_PART_E_GBOARD_ONEHAND:
+        return "PART E : One hand Gboard test";
       default:
-        "ERROR";
+        "ERROR. notice to staff";
     }
   };
 
   const convertTestTypeToDetail = (testType) => {
     switch (testType) {
-      case TEST_TYPE_QWERTY:
-      case TEST_TYPE_CTK_FIRST:
-      case TEST_TYPE_CTK_FINAL:
+      case TEST_TYPE_PART_B_QWERTY:
+      case TEST_TYPE_PART_B_GBOARD:
+      case TEST_TYPE_PART_C_CHEATAKEY:
+      case TEST_TYPE_PART_E_CHEATAKEY:
+      case TEST_TYPE_PART_E_CHEATAKEY_ONEHAND:
+      case TEST_TYPE_PART_E_QWERTY_ONEHAND:
+      case TEST_TYPE_PART_E_GBOARD_ONEHAND:
         return "10 sentences will be presented.";
-      case TEST_TYPE_CTK_PRACTICE:
-        return "5 sets of 20 sentences in each set. (100 sentences)";
+      case TEST_TYPE_PART_D_CHEATAKEY:
+        return "Practice 20 minutes";
       default:
-        "ERROR";
+        "ERROR. notice to staff";
     }
   };
 

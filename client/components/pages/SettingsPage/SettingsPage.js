@@ -5,12 +5,15 @@ import { attemptToSetTesterVariables } from "_thunks/tests";
 import {
   KEYBOARD_TYPE_QWERTY,
   KEYBOARD_TYPE_CHEATAKEY,
-  TEST_TYPE_QWERTY,
-  TEST_TYPE_CTK_FIRST,
-  TEST_TYPE_CTK_PRACTICE,
-  TEST_TYPE_CTK_FINAL,
-  TEST_TYPE_CTK_DIRECTION,
-  TEST_TYPE_CTK_VOWEL_KEY_TYPE,
+  KEYBOARD_TYPE_GBOARD,
+  TEST_TYPE_PART_B_QWERTY,
+  TEST_TYPE_PART_B_GBOARD,
+  TEST_TYPE_PART_C_CHEATAKEY,
+  TEST_TYPE_PART_D_CHEATAKEY,
+  TEST_TYPE_PART_E_CHEATAKEY,
+  TEST_TYPE_PART_E_CHEATAKEY_ONEHAND,
+  TEST_TYPE_PART_E_QWERTY_ONEHAND,
+  TEST_TYPE_PART_E_GBOARD_ONEHAND,
 } from "_utils/variables";
 import M from "materialize-css";
 
@@ -19,60 +22,32 @@ export default function SettingsPage() {
   const [selectedTestType, setSelectedTestType] = useState("");
   const [selectedKeyboardType, setSelectedKeyboardType] = useState("");
   const [nickName, setNickName] = useState("");
-  const [hideOnDirectionTest, setHideOnDirectionTest] = useState(false);
-
-  const onTestTypeSelectChange = (e) => {
-    setSelectedTestType(e.target.value);
-    if (
-      e.target.value == TEST_TYPE_CTK_DIRECTION ||
-      e.target.value == TEST_TYPE_CTK_VOWEL_KEY_TYPE
-    ) {
-      setHideOnDirectionTest(true);
-    } else {
-      setHideOnDirectionTest(false);
-    }
-  };
 
   const onKeyboardTypeSelectChange = (e) => {
     setSelectedKeyboardType(e.target.value);
   };
 
+  const onTestTypeSelectChange = (e) => {
+    setSelectedTestType(e.target.value);
+  };
+
   const onSubmitVariables = () => {
     if (
-      selectedTestType == TEST_TYPE_CTK_DIRECTION ||
-      selectedTestType == TEST_TYPE_CTK_VOWEL_KEY_TYPE
+      selectedTestType == "" ||
+      selectedKeyboardType == "" ||
+      nickName == ""
     ) {
-      if (nickName == "") {
-        M.Modal.init(document.getElementById("modal1")).open();
-      } else {
-        dispatch(
-          attemptToSetTesterVariables(selectedTestType, "NONE", nickName)
-        ).then(() => {
-          if (selectedTestType == TEST_TYPE_CTK_DIRECTION) {
-            dispatch(push("/direction"));
-          } else {
-            dispatch(push("/vowel_key_type"));
-          }
-        });
-      }
+      M.Modal.init(document.getElementById("modal1")).open();
     } else {
-      if (
-        selectedTestType == "" ||
-        selectedKeyboardType == "" ||
-        nickName == ""
-      ) {
-        M.Modal.init(document.getElementById("modal1")).open();
-      } else {
-        dispatch(
-          attemptToSetTesterVariables(
-            selectedTestType,
-            selectedKeyboardType,
-            nickName
-          )
-        ).then(() => {
-          dispatch(push("/guide"));
-        });
-      }
+      dispatch(
+        attemptToSetTesterVariables(
+          selectedTestType,
+          selectedKeyboardType,
+          nickName
+        )
+      ).then(() => {
+        dispatch(push("/guide"));
+      });
     }
   };
 
@@ -83,7 +58,7 @@ export default function SettingsPage() {
   useEffect(() => {
     M.FormSelect.init(document.querySelectorAll("select"));
     M.Modal.init(document.querySelectorAll(".modal"));
-  }, [hideOnDirectionTest]);
+  });
 
   return (
     <div className="row">
@@ -95,32 +70,43 @@ export default function SettingsPage() {
           <option value="test-type-default" disabled>
             Choose test type
           </option>
-          <option value={TEST_TYPE_QWERTY}>QWERTY Test</option>
-          <option value={TEST_TYPE_CTK_FIRST}>First CheatA-Key Test</option>
-          <option value={TEST_TYPE_CTK_PRACTICE}>CheatA-Key Practice</option>
-          <option value={TEST_TYPE_CTK_FINAL}>Final CheatA-Key Test</option>
-          <option value={TEST_TYPE_CTK_DIRECTION}>Direction Test</option>
-          <option value={TEST_TYPE_CTK_VOWEL_KEY_TYPE}>
-            VOWEL-KEY type test
+          <option value={TEST_TYPE_PART_B_QWERTY}>PART B : QWERTY</option>
+          <option value={TEST_TYPE_PART_B_GBOARD}>PART B : GBOARD</option>
+          <option value={TEST_TYPE_PART_C_CHEATAKEY}>
+            PART C : NEW Keyboard
+          </option>
+          <option value={TEST_TYPE_PART_D_CHEATAKEY}>
+            PART D : NEW Keyboard
+          </option>
+          <option value={TEST_TYPE_PART_E_CHEATAKEY}>
+            PART E : NEW Keyboard
+          </option>
+          <option value={TEST_TYPE_PART_E_QWERTY_ONEHAND}>
+            PART E : QWERTY One hand
+          </option>
+          <option value={TEST_TYPE_PART_E_GBOARD_ONEHAND}>
+            PART E : Gboard One hand
+          </option>
+          <option value={TEST_TYPE_PART_E_CHEATAKEY_ONEHAND}>
+            PART E : New Keyboard One hand
           </option>
         </select>
         <label>Test type</label>
       </div>
-      {hideOnDirectionTest ? null : (
-        <div className="input-field col s12">
-          <select
-            defaultValue="keyboard-type-default"
-            onChange={onKeyboardTypeSelectChange}
-          >
-            <option value="keyboard-type-default" disabled>
-              Choose keyboard type
-            </option>
-            <option value={KEYBOARD_TYPE_QWERTY}>QWERTY</option>
-            <option value={KEYBOARD_TYPE_CHEATAKEY}>CheatA-Key</option>
-          </select>
-          <label>Keyboard type</label>
-        </div>
-      )}
+      <div className="input-field col s12">
+        <select
+          defaultValue="keyboard-type-default"
+          onChange={onKeyboardTypeSelectChange}
+        >
+          <option value="keyboard-type-default" disabled>
+            Choose keyboard type
+          </option>
+          <option value={KEYBOARD_TYPE_QWERTY}>QWERTY</option>
+          <option value={KEYBOARD_TYPE_GBOARD}>Gboard</option>
+          <option value={KEYBOARD_TYPE_CHEATAKEY}>CheatA-Key</option>
+        </select>
+        <label>Keyboard type</label>
+      </div>
       <div className="input-field col s12">
         <input
           id="nickName"

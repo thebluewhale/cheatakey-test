@@ -3,12 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { attempToPostTestResult } from "_thunks/tests";
 import {
-  TEST_TYPE_QWERTY,
-  TEST_TYPE_CTK_FIRST,
-  TEST_TYPE_CTK_PRACTICE,
-  TEST_TYPE_CTK_FINAL,
-  REPORT_TYPE_SUBMIT,
   REPORT_TYPE_ERROR_TYPO,
+  REPORT_TYPE_SUBMIT,
+  TEST_TYPE_PART_B_QWERTY,
+  TEST_TYPE_PART_B_GBOARD,
+  TEST_TYPE_PART_C_CHEATAKEY,
+  TEST_TYPE_PART_D_CHEATAKEY,
+  TEST_TYPE_PART_E_CHEATAKEY,
+  TEST_TYPE_PART_E_CHEATAKEY_ONEHAND,
+  TEST_TYPE_PART_E_QWERTY_ONEHAND,
+  TEST_TYPE_PART_E_GBOARD_ONEHAND,
 } from "_utils/variables";
 import R from "ramda";
 
@@ -93,38 +97,40 @@ export default function TestPage() {
   };
 
   useEffect(() => {
-    // const shuffle = (array) => {
-    //   for (let index = array.length - 1; index > 0; index--) {
-    //     const randomPosition = Math.floor(Math.random() * (index + 1));
-    //     const temp = array[index];
-    //     array[index] = array[randomPosition];
-    //     array[randomPosition] = temp;
-    //   }
-    // };
+    const shuffle = (array) => {
+      let tempArray = JSON.parse(JSON.stringify(array));
+      for (let index = tempArray.length - 1; index > 0; index--) {
+        const randomPosition = Math.floor(Math.random() * (index + 1));
+        const temp = tempArray[index];
+        tempArray[index] = tempArray[randomPosition];
+        tempArray[randomPosition] = temp;
+      }
+      return tempArray;
+    };
 
     let _extractedLists = [];
     switch (variables.testType) {
-      case TEST_TYPE_QWERTY:
-      case TEST_TYPE_CTK_FIRST:
-        // 10 sentences
+      case TEST_TYPE_PART_B_QWERTY:
+      case TEST_TYPE_PART_B_GBOARD:
+      case TEST_TYPE_PART_C_CHEATAKEY:
+      case TEST_TYPE_PART_E_CHEATAKEY:
+        // 10 sentences, test set A
         _extractedLists = lists.slice(0, 10);
         break;
-      case TEST_TYPE_CTK_PRACTICE:
-        // 5 set, 20 sentences per set
-        let tempList = lists.slice(10, 30);
-        for (let i = 0; i < 5; i++) {
-          tempList.map((data, index) => {
-            _extractedLists.push(data);
-          });
-        }
+      case TEST_TYPE_PART_E_CHEATAKEY_ONEHAND:
+      case TEST_TYPE_PART_E_QWERTY_ONEHAND:
+      case TEST_TYPE_PART_E_GBOARD_ONEHAND:
+        // 10 sentences, test set B
+        _extractedLists = lists.slice(10, 20);
         break;
-      case TEST_TYPE_CTK_FINAL:
-        // 5 words from part 1 + 5 words
-        _extractedLists = lists.slice(3, 8).concat(lists.slice(30, 35));
+      case TEST_TYPE_PART_D_CHEATAKEY:
+        // 10 sentences, test set B
+        _extractedLists = shuffle(lists);
         break;
       default:
         dispatch(push("/error"));
     }
+    console.log(_extractedLists);
     setExtractedLists(_extractedLists);
     setMaxProgress(_extractedLists.length);
   }, []);
