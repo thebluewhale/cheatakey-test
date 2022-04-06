@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { attemptToSetTesterVariables } from "_thunks/tests";
 import {
@@ -19,6 +19,7 @@ import M from "materialize-css";
 
 export default function SettingsPage() {
   const dispatch = useDispatch();
+  const variables = useSelector((state) => state.tests.variables);
   const [selectedTestType, setSelectedTestType] = useState("");
   const [selectedKeyboardType, setSelectedKeyboardType] = useState("");
   const [nickName, setNickName] = useState("");
@@ -58,6 +59,10 @@ export default function SettingsPage() {
   useEffect(() => {
     M.FormSelect.init(document.querySelectorAll("select"));
     M.Modal.init(document.querySelectorAll(".modal"));
+    if (variables && variables.nickName != "") {
+      setNickName(variables.nickName);
+      M.updateTextFields();
+    }
   });
 
   return (

@@ -130,7 +130,6 @@ export default function TestPage() {
       default:
         dispatch(push("/error"));
     }
-    console.log(_extractedLists);
     setExtractedLists(_extractedLists);
     setMaxProgress(_extractedLists.length);
   }, []);

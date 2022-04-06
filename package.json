@@ -61,7 +61,6 @@
     "json-style-converter": "^1.0.3",
     "materialize-css": "^1.0.0-rc.2",
     "mongoose": "^6.0.7",
-    "mongoose-auto-increment-reworked": "^1.2.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "prop-types": "^15.7.2",
