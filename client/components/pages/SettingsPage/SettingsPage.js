@@ -14,6 +14,8 @@ import {
   TEST_TYPE_PART_E_CHEATAKEY_ONEHAND,
   TEST_TYPE_PART_E_QWERTY_ONEHAND,
   TEST_TYPE_PART_E_GBOARD_ONEHAND,
+  TEST_TYPE_COMPETITION_A,
+  TEST_TYPE_COMPETITION_B,
 } from "_utils/variables";
 import M from "materialize-css";
 
@@ -94,6 +96,12 @@ export default function SettingsPage() {
           </option>
           <option value={TEST_TYPE_PART_E_CHEATAKEY_ONEHAND}>
             PART E : New Keyboard One hand
+          </option>
+          <option value={TEST_TYPE_COMPETITION_A}>
+            CheatAKey Competition : Game A
+          </option>
+          <option value={TEST_TYPE_COMPETITION_B}>
+            CheatAKey Competition : Game B
           </option>
         </select>
         <label>Test type</label>

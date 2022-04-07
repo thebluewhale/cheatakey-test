@@ -13,6 +13,8 @@ import {
   TEST_TYPE_PART_E_CHEATAKEY_ONEHAND,
   TEST_TYPE_PART_E_QWERTY_ONEHAND,
   TEST_TYPE_PART_E_GBOARD_ONEHAND,
+  TEST_TYPE_COMPETITION_A,
+  TEST_TYPE_COMPETITION_B,
 } from "_utils/variables";
 
 export default function GuidePage() {
@@ -37,6 +39,10 @@ export default function GuidePage() {
         return "PART E : One hand QWERTY test";
       case TEST_TYPE_PART_E_GBOARD_ONEHAND:
         return "PART E : One hand Gboard test";
+      case TEST_TYPE_COMPETITION_A:
+        return "GAME A";
+      case TEST_TYPE_COMPETITION_B:
+        return "GAME B";
       default:
         "ERROR. notice to staff";
     }
@@ -54,6 +60,9 @@ export default function GuidePage() {
         return "10 sentences will be presented.";
       case TEST_TYPE_PART_D_CHEATAKEY:
         return "Practice 20 minutes";
+      case TEST_TYPE_COMPETITION_A:
+      case TEST_TYPE_COMPETITION_B:
+        return "2 sentences will be presented";
       default:
         "ERROR. notice to staff";
     }

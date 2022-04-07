@@ -13,7 +13,10 @@ import {
   TEST_TYPE_PART_E_CHEATAKEY_ONEHAND,
   TEST_TYPE_PART_E_QWERTY_ONEHAND,
   TEST_TYPE_PART_E_GBOARD_ONEHAND,
+  TEST_TYPE_COMPETITION_A,
+  TEST_TYPE_COMPETITION_B,
 } from "_utils/variables";
+import { leven, calcCompetitionPoint } from "_utils/competition";
 import R from "ramda";
 
 export default function TestPage() {
@@ -27,11 +30,10 @@ export default function TestPage() {
   const [progress, setProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [startTime, setStartTime] = useState(new Date());
-  const [accuracy, setAccuracy] = useState(0);
-  const [speed, setSpeed] = useState(0.0);
   const [isStarted, setIsStarted] = useState(false);
   const [isErrorTypoReported, setIsErrorTypoReported] = useState(false);
   const [lastInputValueLength, setLastInputValueLength] = useState(0);
+  const [competitionPoint, setCompetitionPoint] = useState(0);
   const submitInput = useRef();
 
   const onSubmitInputChanged = (e) => {
@@ -73,8 +75,14 @@ export default function TestPage() {
   const onSubmitText = () => {
     setProgress(progress + 1);
     setLastInputValueLength(0);
+    // calc speed
     let endTime = new Date();
     let leadTime = endTime.getTime() - startTime.getTime();
+    let speed = ((submittedText.length / leadTime) * 60 * 1000).toFixed(0);
+    // calc accuracy
+    let accuracy = leven(presentedText, submittedText);
+    // save for final data
+    // post result
     dispatch(
       attempToPostTestResult(
         presentedText,
@@ -92,7 +100,9 @@ export default function TestPage() {
       .then(() => {});
     setSubmittedText("");
     setIsStarted(false);
-    setAccuracy(0);
+    setCompetitionPoint(
+      competitionPoint + calcCompetitionPoint(presentedText, leadTime, accuracy)
+    );
     submitInput.current.focus();
   };
 
@@ -127,11 +137,22 @@ export default function TestPage() {
         // 10 sentences, test set B
         _extractedLists = shuffle(lists);
         break;
+      case TEST_TYPE_COMPETITION_A:
+      case TEST_TYPE_COMPETITION_B:
+        let competitionList = [
+          "nice to meet you",
+          "show me the money",
+          "power overwhelming",
+          "operation cwal",
+        ];
+        _extractedLists = shuffle(competitionList).slice(0, 2);
+        break;
       default:
         dispatch(push("/error"));
     }
     setExtractedLists(_extractedLists);
     setMaxProgress(_extractedLists.length);
+    setCompetitionPoint(0);
   }, []);
 
   useEffect(() => {
@@ -141,27 +162,10 @@ export default function TestPage() {
 
   useEffect(() => {
     if (progress == maxProgress) {
-      dispatch(push("/terminate"));
+      dispatch(push(`/terminate?point=${competitionPoint}`));
     }
     setPresentedText(extractedLists[progress]);
   }, [progress]);
-
-  useEffect(() => {
-    // Calc speed
-    if (submittedText.length > 0) {
-      let currentTime = new Date();
-      let leadSec = (currentTime.getTime() - startTime.getTime()) / 1000;
-      setSpeed(((submittedText.length / leadSec) * 60).toFixed(0));
-    }
-    // Calc accuracy
-    let errorTextCount = 0;
-    for (let i = 0; i < submittedText.length; i++) {
-      if (submittedText[i] != presentedText[i]) {
-        errorTextCount++;
-      }
-    }
-    setAccuracy((1 - errorTextCount / submittedText.length) * 100);
-  }, [submittedText]);
 
   return isLoading ? (
     <div className="preloader-wrapper active">
@@ -209,12 +213,6 @@ export default function TestPage() {
             />
             <label htmlFor="submitter">Type here</label>
           </div>
-        </div>
-        <div className="col s12">
-          <h6 className="right">{`accuracy : ${accuracy} %`}</h6>
-        </div>
-        <div className="col s12">
-          <h6 className="right">{`speed : ${speed} / min`}</h6>
         </div>
         <div className="col s12">
           <div className="btn purple lighten-2" onClick={onSubmitText}>
