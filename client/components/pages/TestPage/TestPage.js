@@ -164,7 +164,13 @@ export default function TestPage() {
 
   useEffect(() => {
     if (progress == maxProgress) {
-      dispatch(push(`/terminate?point=${competitionPoint}`));
+      dispatch(
+        push(
+          `/terminate?point=${(
+            Number.parseFloat(competitionPoint) * 10
+          ).toFixed(2)}`
+        )
+      );
     }
     setPresentedText(extractedLists[progress]);
   }, [progress]);
