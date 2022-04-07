@@ -141,9 +141,11 @@ export default function TestPage() {
       case TEST_TYPE_COMPETITION_B:
         let competitionList = [
           "nice to meet you",
-          "show me the money",
-          "power overwhelming",
-          "operation cwal",
+          "have a good day",
+          "seoul city",
+          "mobile phone",
+          "rosemary blended",
+          "coffee cup",
         ];
         _extractedLists = shuffle(competitionList).slice(0, 2);
         break;
