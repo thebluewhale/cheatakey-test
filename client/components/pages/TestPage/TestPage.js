@@ -78,7 +78,7 @@ export default function TestPage() {
     // calc speed
     let endTime = new Date();
     let leadTime = endTime.getTime() - startTime.getTime();
-    let speed = ((submittedText.length / leadTime) * 60 * 1000).toFixed(0);
+    let speed = ((presentedText.length / leadTime) * 60 * 1000).toFixed(0);
     // calc accuracy
     let accuracy = leven(presentedText, submittedText);
     // save for final data

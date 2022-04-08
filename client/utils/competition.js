@@ -33,9 +33,11 @@ export const leven = (presentedText, submittedText) => {
 
 export const calcCompetitionPoint = (presentedText, leadTime, accuracy) => {
   // one seconds means about 3 points, because average type speed is 180 per min.
-  const ONE_SECOND_POINT = (38 * 5) / 60;
-  let expectedLeadTime = presentedText.length / ONE_SECOND_POINT;
-  let timePoint = (expectedLeadTime - leadTime / 1000) * ONE_SECOND_POINT;
-  let typingPoint = presentedText.length * accuracy;
-  return timePoint + typingPoint;
+  // const ONE_SECOND_POINT = (38 * 5) / 60;
+  // let expectedLeadTime = presentedText.length / ONE_SECOND_POINT;
+  // let timePoint = (expectedLeadTime - leadTime / 1000) * ONE_SECOND_POINT;
+  // let typingPoint = presentedText.length * accuracy;
+  // return timePoint + typingPoint;
+  let speed = ((presentedText.length / leadTime) * 60 * 1000).toFixed(0);
+  return Number.parseFloat(speed) + Number.parseFloat(accuracy * 100);
 };
