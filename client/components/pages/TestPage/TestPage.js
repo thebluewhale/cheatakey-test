@@ -139,28 +139,7 @@ export default function TestPage() {
         break;
       case TEST_TYPE_COMPETITION_A:
       case TEST_TYPE_COMPETITION_B:
-        let competitionList = [
-          "Have a nice day",
-          "Out of sight out of mind",
-          "Courage is very important like a muscle",
-          "He played the shot with consummate skill",
-          "Bite off more than you can chew",
-          "Do not put all your eggs in one basket",
-          "You can not have your cake and eat it too",
-          "A rolling stone gathers no moss",
-          "He tried to steal second base but was out",
-          "A man that has no virtue in himself ever envies virtue in others",
-          "It has rained continuously for three days",
-          "Salt water is more buoyant than fresh water",
-          "Left out in the cold",
-          "Keep an ear to the ground",
-          "The opera was the place to see and to be seen",
-          "Cut off your nose to spite your face",
-          "Not enough energy",
-          "It is good day to die",
-          "Guess what I think about",
-          "Have a nice day",
-        ];
+        let competitionList = lists.slice(0, 20);
         _extractedLists = shuffle(competitionList).slice(0, 2);
         break;
       default:
