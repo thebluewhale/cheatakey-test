@@ -38,6 +38,10 @@ export const calcCompetitionPoint = (presentedText, leadTime, accuracy) => {
   // let timePoint = (expectedLeadTime - leadTime / 1000) * ONE_SECOND_POINT;
   // let typingPoint = presentedText.length * accuracy;
   // return timePoint + typingPoint;
-  let speed = ((presentedText.length / leadTime) * 60 * 1000).toFixed(0);
+  let speed = (
+    ((presentedText.length * Number.parseFloat(accuracy)) / leadTime) *
+    60 *
+    1000
+  ).toFixed(0);
   return Number.parseFloat(speed) + Number.parseFloat(accuracy * 100);
 };
