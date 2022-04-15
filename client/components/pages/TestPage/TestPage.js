@@ -18,7 +18,6 @@ import {
 } from "_utils/variables";
 import { leven, calcCompetitionPoint } from "_utils/competition";
 import R from "ramda";
-import { off } from "superagent";
 
 export default function TestPage() {
   const dispatch = useDispatch();
