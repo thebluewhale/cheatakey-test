@@ -18,6 +18,7 @@ import {
 } from "_utils/variables";
 import { leven, calcCompetitionPoint } from "_utils/competition";
 import R from "ramda";
+import { off } from "superagent";
 
 export default function TestPage() {
   const dispatch = useDispatch();
@@ -139,7 +140,12 @@ export default function TestPage() {
         break;
       case TEST_TYPE_COMPETITION_A:
       case TEST_TYPE_COMPETITION_B:
-        let competitionList = lists.slice(0, 20);
+        let competitionList = [
+          "left out in the cold",
+          "keep an ear to the ground",
+          "cut off your nose to spite your face",
+          "have a nice day",
+        ];
         _extractedLists = shuffle(competitionList).slice(0, 2);
         break;
       default:
