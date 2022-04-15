@@ -139,13 +139,7 @@ export default function TestPage() {
         break;
       case TEST_TYPE_COMPETITION_A:
       case TEST_TYPE_COMPETITION_B:
-        let competitionList = [
-          "left out in the cold",
-          "keep an ear to the ground",
-          "cut off your nose to spite your face",
-          "have a nice day",
-        ];
-        _extractedLists = shuffle(competitionList).slice(0, 2);
+        _extractedLists = shuffle(lists.slice(40, 44)).slice(0, 2);
         break;
       default:
         dispatch(push("/error"));

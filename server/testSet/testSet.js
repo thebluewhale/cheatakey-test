@@ -42,6 +42,11 @@ const testSet = [
   "it is not good to listen to flattery",
   "a friend in need is a friend indeed",
   "shrouds have no pockets",
+  // Competition set
+  "left out in the cold",
+  "keep an ear to the ground",
+  "cut off your nose to spite your face",
+  "have a nice day",
 ];
 
 module.exports = testSet;
